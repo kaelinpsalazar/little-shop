@@ -66,4 +66,10 @@ RSpec.describe "Mechant", type: :request do
             expect{Merchant.find(@merchant2.id)}.to raise_error(ActiveRecord::RecordNotFound)
         end
     end
+
+    describe "retruns all items for a merchant with #index" do
+      it "can return all the items for a specific merchant" do
+
+      end
+    end
 end
