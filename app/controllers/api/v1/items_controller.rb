@@ -9,4 +9,8 @@ class Api::V1::ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
   end
   
+  def index
+    render json: ItemSerializer.new(Item.all)
+  end
+
 end

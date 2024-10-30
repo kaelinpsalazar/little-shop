@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/environment.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/application.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/application.rb": {
         "lines": [
           1,
           null,
@@ -58,7 +58,7 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/boot.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -66,7 +66,7 @@
           1
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/environments/test.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -137,7 +137,7 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/initializers/cors.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/initializers/cors.rb": {
         "lines": [
           null,
           null,
@@ -157,7 +157,7 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/initializers/filter_parameter_logging.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -169,7 +169,7 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/initializers/inflections.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -189,73 +189,21 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/spec/factories/item.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/config/routes.rb": {
         "lines": [
           1,
           null,
+          null,
+          null,
+          null,
           1,
           1,
-          5,
-          5,
-          5,
-          1,
+          null,
           null,
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/spec/factories/merchant.rb": {
-        "lines": [
-          1,
-          1,
-          5,
-          null,
-          null
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/config/routes.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/spec/support/factory_bot.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/models/item.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/spec/requests/api/v1/merchants_request_spec.rb": {
-        "lines": [
-
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/models/merchant.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/models/merchant.rb": {
         "lines": [
           1,
           1,
@@ -264,7 +212,22 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/controllers/api/v1/items_controller.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
           1,
@@ -273,6 +236,10 @@
           null,
           null,
           1,
+          1,
+          1,
+          null,
+          null,
           1,
           1,
           null,
@@ -280,20 +247,25 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/controllers/application_controller.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/serializers/item_serializer.rb": {
+      "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/serializers/item_serializer.rb": {
         "lines": [
           1,
           1,
           null,
           1,
           null,
+          1,
+          3,
           null,
+          null,
+          1,
+          3,
           null,
           null
         ]
