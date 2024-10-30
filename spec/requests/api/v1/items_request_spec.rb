@@ -27,6 +27,21 @@ RSpec.describe "Items API", type: :request do
       expect(item[:attributes][:unit_price]).to be_an(Float)
       expect(item[:attributes][:merchant_id]).to be_an(Integer)
     end
+
+    it "can get all items sorted by price" do 
+      get '/api/v1/items?sorted=price'
+      
+      expect(response).to be_successful 
+      expect(response).to have_http_status(:ok) 
+
+      items = JSON.parse(response.body, symbolize_names: true)[:data] 
+
+      expect(items).to be_an(Array) 
+      expect(items.count).to eq(4) 
+
+      prices = items.map { |item| item[:attributes][:unit_price] } 
+      expect(prices).to eq(prices.sort)
+    end
   end
 
   describe "Show item" do
@@ -145,10 +160,7 @@ RSpec.describe "Items API", type: :request do
 
     expect(merchant_info[:data]).to have_key(:id) 
     expect(merchant_info[:data][:attributes]).to have_key(:name) 
-    expect(merchant_info[:data][:attributes][:name]).to eq(@merchant.name) 
-
-
-
+    expect(merchant_info[:data][:attributes][:name]).to eq(@merchant.name)
   end
   
 end
