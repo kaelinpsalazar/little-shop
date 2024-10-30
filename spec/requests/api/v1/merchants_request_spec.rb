@@ -36,4 +36,17 @@ RSpec.describe "Mechant", type: :request do
       expect(merchant.name).to eq("Troll's")
     end
   end
+
+  describe "deletes a merchant with #delete" do
+    it "can delete an existing merchant" do
+
+      expect(Merchant.count).to eq(3)
+
+      delete "/api/v1/merchants/#{@merchant2.id}"
+
+      expect(response).to be_successful
+      expect(Merchant.count).to eq(2)
+      expect{Merchant.find(@merchant2.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end
