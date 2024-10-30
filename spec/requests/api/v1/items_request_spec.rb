@@ -111,4 +111,19 @@ RSpec.describe "Items API", type: :request do
       expect(changed_item[:data][:attributes][:unit_price]).to eq(2.00)
     end
   end
+
+  it "can delete an item" do
+    item = Item.create(
+        name: "socks",
+        description: "keep feet warm",
+        unit_price: 99.99,
+        merchant_id: @merchant.id
+      )
+      expect(Item.all.count).to eq(5)
+      delete "/api/v1/items/#{item.id}"
+      expect(response).to be_successful
+
+      expect(Item.find_by(id: item.id)).to be_nil
+
+  end
 end
