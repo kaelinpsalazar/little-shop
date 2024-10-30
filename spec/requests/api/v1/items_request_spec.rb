@@ -4,10 +4,7 @@ RSpec.describe "Items API", type: :request do
   before(:each) do
     @merchant = Merchant.create!(name: "Steve")
     create_list(:item, 4, merchant: @merchant)
-  end
-
-  describe "Fetch All Items" do
-    before do
+  
       @fake_merchant = Merchant.create!(name: "Fake Merchant")
 
       @item1 = Item.create!(
