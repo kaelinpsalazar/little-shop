@@ -5,19 +5,19 @@ RSpec.describe "Items API", type: :request do
     @merchant = Merchant.create!(name: "Steve")
     create_list(:item, 4, merchant: @merchant)
   
-      @fake_merchant = Merchant.create!(name: "Fake Merchant")
-    end
+    @fake_merchant = Merchant.create!(name: "Fake Merchant")
+  end
 
-    describe "Get all with #index" do
-      it "can get all items" do
-        get '/api/v1/items'
+  describe "Get all with #index" do
+    it "can get all items" do
+      get '/api/v1/items'
 
-        expect(response).to be_successful
-        expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
+      expect(response).to have_http_status(:ok)
 
-        items = JSON.parse(response.body, symbolize_names: true)[:data]
-        expect(items).to be_an(Array)
-        expect(items.count).to eq(4)
+      items = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(items).to be_an(Array)
+      expect(items.count).to eq(4)
 
       item = items[0]
       expect(item[:type]).to eq('item')
@@ -26,9 +26,31 @@ RSpec.describe "Items API", type: :request do
       expect(item[:attributes][:description]).to be_an(String)
       expect(item[:attributes][:unit_price]).to be_an(Float)
       expect(item[:attributes][:merchant_id]).to be_an(Integer)
-      end
     end
-  
+  end
+
+  describe "Show item" do
+    it "can show an individual item" do
+      item = Item.create(
+        name: "socks",
+        description: "keep feet warm",
+        unit_price: 99.99,
+        merchant_id: @merchant.id
+      )
+      get "/api/v1/items/#{item.id}"
+
+      expect(response).to be_successful
+      
+      item = JSON.parse(response.body, symbolize_names:true)[:data]
+
+      expect(item[:type]).to eq('item')
+      expect(item[:id]).to be_an(String)
+      expect(item).to have_key(:attributes)
+      expect(item[:attributes][:description]).to be_an(String)
+      expect(item[:attributes][:unit_price]).to be_an(Float)
+      expect(item[:attributes][:merchant_id]).to be_an(Integer)
+    end
+  end 
 
   describe "Create Item" do
     it "can create a new item" do
@@ -121,9 +143,9 @@ RSpec.describe "Items API", type: :request do
 
     merchant_info = JSON.parse(response.body, symbolize_names: true)
 
-  expect(merchant_info[:data]).to have_key(:id) 
-  expect(merchant_info[:data][:attributes]).to have_key(:name) 
-  expect(merchant_info[:data][:attributes][:name]).to eq(@merchant.name) 
+    expect(merchant_info[:data]).to have_key(:id) 
+    expect(merchant_info[:data][:attributes]).to have_key(:name) 
+    expect(merchant_info[:data][:attributes][:name]).to eq(@merchant.name) 
 
 
 

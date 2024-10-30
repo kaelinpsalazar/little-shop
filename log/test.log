@@ -498,3 +498,408 @@ Processing by Api::V1::MerchantsController#show as HTML
   [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
 Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (4.6ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Han Solo"], ["created_at", "2024-10-30 20:16:12.729802"], ["updated_at", "2024-10-30 20:16:12.729802"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (1.8ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Greedo"], ["description", "Careful, Ren, that your personal interests not interfere with orders from Leader Snoke."], ["unit_price", 75.0], ["merchant_id", 1], ["created_at", "2024-10-30 20:16:12.735803"], ["updated_at", "2024-10-30 20:16:12.735803"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Sebulba"], ["description", "Twice the pride, double the fall."], ["unit_price", 20.0], ["merchant_id", 1], ["created_at", "2024-10-30 20:16:12.738301"], ["updated_at", "2024-10-30 20:16:12.738301"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Boba Fett"], ["description", "You can't stop change any more than you can stop the suns from setting."], ["unit_price", 55.0], ["merchant_id", 1], ["created_at", "2024-10-30 20:16:12.739017"], ["updated_at", "2024-10-30 20:16:12.739017"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mItem Load (1.6ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."unit_price" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:16:12.746303"], ["updated_at", "2024-10-30 20:16:12.746303"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Wedge Antilles"], ["description", "I assume you need something. Desperately."], ["unit_price", 81.58], ["merchant_id", 2], ["created_at", "2024-10-30 20:16:12.747023"], ["updated_at", "2024-10-30 20:16:12.747023"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Darth Maul"], ["description", "You will remove these restraints and leave this cell with the door open."], ["unit_price", 99.92], ["merchant_id", 2], ["created_at", "2024-10-30 20:16:12.747712"], ["updated_at", "2024-10-30 20:16:12.747712"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Chirrut Imwe"], ["description", "You will remove these restraints and leave this cell with the door open."], ["unit_price", 17.44], ["merchant_id", 2], ["created_at", "2024-10-30 20:16:12.748343"], ["updated_at", "2024-10-30 20:16:12.748343"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Vice Admiral Holdo"], ["description", "Yipe! How wude!"], ["unit_price", 14.31], ["merchant_id", 2], ["created_at", "2024-10-30 20:16:12.748981"], ["updated_at", "2024-10-30 20:16:12.748981"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:16:12.749509"], ["updated_at", "2024-10-30 20:16:12.749509"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 2], ["created_at", "2024-10-30 20:16:12.752580"], ["updated_at", "2024-10-30 20:16:12.752580"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mItem Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started DELETE "/api/v1/items/8" for 127.0.0.1 at 2024-10-30 14:16:12 -0600
+Processing by Api::V1::ItemsController#destroy as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Destroy (1.2ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = $1[0m  [["id", 8]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 204 No Content in 5ms (ActiveRecord: 1.4ms | Allocations: 4483)
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:16:12.767162"], ["updated_at", "2024-10-30 20:16:12.767162"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Chewbacca"], ["description", "That's no moon. It's a space station."], ["unit_price", 78.83], ["merchant_id", 4], ["created_at", "2024-10-30 20:16:12.767969"], ["updated_at", "2024-10-30 20:16:12.767969"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Panaka"], ["description", "Remember, your focus determines your reality."], ["unit_price", 40.01], ["merchant_id", 4], ["created_at", "2024-10-30 20:16:12.768694"], ["updated_at", "2024-10-30 20:16:12.768694"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mace Windu"], ["description", "In my experience there is no such thing as luck."], ["unit_price", 36.61], ["merchant_id", 4], ["created_at", "2024-10-30 20:16:12.769203"], ["updated_at", "2024-10-30 20:16:12.769203"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Nute Gunray"], ["description", "Wars not make one great."], ["unit_price", 34.57], ["merchant_id", 4], ["created_at", "2024-10-30 20:16:12.769802"], ["updated_at", "2024-10-30 20:16:12.769802"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:16:12.770289"], ["updated_at", "2024-10-30 20:16:12.770289"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 4], ["created_at", "2024-10-30 20:16:12.771100"], ["updated_at", "2024-10-30 20:16:12.771100"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/items/13/merchant" for 127.0.0.1 at 2024-10-30 14:16:12 -0600
+Processing by Api::V1::ItemsMerchantController#index as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 13], ["LIMIT", 1]]
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 887)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:16:12.774144"], ["updated_at", "2024-10-30 20:16:12.774144"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Ezra Bridger"], ["description", "So be it, Jedi."], ["unit_price", 52.97], ["merchant_id", 6], ["created_at", "2024-10-30 20:16:12.774817"], ["updated_at", "2024-10-30 20:16:12.774817"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Borvo the Hutt"], ["description", "Sone guru ye buya nyah oo won spasteega koo shu coon bon duwa weeptee. (He has no time for smugglers who drop their shipments at the first sign of an Imperial cruiser.)"], ["unit_price", 76.21], ["merchant_id", 6], ["created_at", "2024-10-30 20:16:12.775535"], ["updated_at", "2024-10-30 20:16:12.775535"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Rey"], ["description", "An elegant weapon for a more civilized age."], ["unit_price", 46.43], ["merchant_id", 6], ["created_at", "2024-10-30 20:16:12.776231"], ["updated_at", "2024-10-30 20:16:12.776231"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Ki-Adi-Mundi"], ["description", "We have no choice, General Calrissian! Our cruisers can't repel firepower of that magnitude!"], ["unit_price", 17.86], ["merchant_id", 6], ["created_at", "2024-10-30 20:16:12.776857"], ["updated_at", "2024-10-30 20:16:12.776857"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:16:12.777346"], ["updated_at", "2024-10-30 20:16:12.777346"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/items" for 127.0.0.1 at 2024-10-30 14:16:12 -0600
+Processing by Api::V1::ItemsController#index as HTML
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items"[0m
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 688)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:16:12.779953"], ["updated_at", "2024-10-30 20:16:12.779953"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Jango Fett"], ["description", "He's no good to me dead."], ["unit_price", 80.28], ["merchant_id", 8], ["created_at", "2024-10-30 20:16:12.780557"], ["updated_at", "2024-10-30 20:16:12.780557"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Grand Admiral Thrawn"], ["description", "You can run, but you'll only die tired."], ["unit_price", 13.86], ["merchant_id", 8], ["created_at", "2024-10-30 20:16:12.781171"], ["updated_at", "2024-10-30 20:16:12.781171"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Supreme Leader Snoke"], ["description", "Size matters not. Look at me. Judge me by my size, do you?"], ["unit_price", 48.59], ["merchant_id", 8], ["created_at", "2024-10-30 20:16:12.781739"], ["updated_at", "2024-10-30 20:16:12.781739"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Han Solo"], ["description", "I find your lack of faith disturbing."], ["unit_price", 20.24], ["merchant_id", 8], ["created_at", "2024-10-30 20:16:12.782298"], ["updated_at", "2024-10-30 20:16:12.782298"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:16:12.782819"], ["updated_at", "2024-10-30 20:16:12.782819"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started POST "/api/v1/items" for 127.0.0.1 at 2024-10-30 14:16:12 -0600
+Processing by Api::V1::ItemsController#create as HTML
+  Parameters: {"item"=>{"name"=>"Controller", "description"=>"Play videogames", "unit_price"=>50.99, "merchant_id"=>8}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Controller"], ["description", "Play videogames"], ["unit_price", 50.99], ["merchant_id", 8], ["created_at", "2024-10-30 20:16:12.784493"], ["updated_at", "2024-10-30 20:16:12.784493"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 902)
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:16:12.785973"], ["updated_at", "2024-10-30 20:16:12.785973"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Sebulba"], ["description", "Droid, please!"], ["unit_price", 53.78], ["merchant_id", 10], ["created_at", "2024-10-30 20:16:12.786584"], ["updated_at", "2024-10-30 20:16:12.786584"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Panaka"], ["description", "Ohhh. Great warrior. Wars not make one great."], ["unit_price", 59.28], ["merchant_id", 10], ["created_at", "2024-10-30 20:16:12.787234"], ["updated_at", "2024-10-30 20:16:12.787234"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Chirrut Imwe"], ["description", "Your hate has made you powerful. Now fulfill your destiny, and take your father's place at my side."], ["unit_price", 27.36], ["merchant_id", 10], ["created_at", "2024-10-30 20:16:12.787817"], ["updated_at", "2024-10-30 20:16:12.787817"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mon Mothma"], ["description", "The Force is strong with him. The son of Skywalker must not become a Jedi."], ["unit_price", 48.41], ["merchant_id", 10], ["created_at", "2024-10-30 20:16:12.788348"], ["updated_at", "2024-10-30 20:16:12.788348"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:16:12.788782"], ["updated_at", "2024-10-30 20:16:12.788782"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 10], ["created_at", "2024-10-30 20:16:12.789535"], ["updated_at", "2024-10-30 20:16:12.789535"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/api/v1/items/27" for 127.0.0.1 at 2024-10-30 14:16:12 -0600
+Processing by Api::V1::ItemsController#update as HTML
+  Parameters: {"item"=>{"name"=>"Pants", "description"=>"they keep legs warm", "unit_price"=>2.0, "merchant_id"=>10}, "id"=>"27"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Update (0.3ms)[0m  [1m[33mUPDATE "items" SET "name" = $1, "description" = $2, "unit_price" = $3, "updated_at" = $4 WHERE "items"."id" = $5[0m  [["name", "Pants"], ["description", "they keep legs warm"], ["unit_price", 2.0], ["updated_at", "2024-10-30 20:16:12.790674"], ["id", 27]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 1ms (Views: 0.0ms | ActiveRecord: 0.5ms | Allocations: 878)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Gnome Depot"], ["created_at", "2024-10-30 20:16:12.791934"], ["updated_at", "2024-10-30 20:16:12.791934"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bloodbath and Beyond"], ["created_at", "2024-10-30 20:16:12.792450"], ["updated_at", "2024-10-30 20:16:12.792450"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "The Philosopher's Scone"], ["created_at", "2024-10-30 20:16:12.792940"], ["updated_at", "2024-10-30 20:16:12.792940"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/merchants/12" for 127.0.0.1 at 2024-10-30 14:16:12 -0600
+Processing by Api::V1::MerchantsController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.1ms | Allocations: 409)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (13.7ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Nute Gunray"], ["created_at", "2024-10-30 20:40:26.194353"], ["updated_at", "2024-10-30 20:40:26.194353"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (2.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Captain Phasma"], ["description", "Show me again, Grandfather, and I will finish what you started."], ["unit_price", 75.0], ["merchant_id", 15], ["created_at", "2024-10-30 20:40:26.209664"], ["updated_at", "2024-10-30 20:40:26.209664"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Luke Skywalker"], ["description", "I've got a bad feeling about this."], ["unit_price", 20.0], ["merchant_id", 15], ["created_at", "2024-10-30 20:40:26.212795"], ["updated_at", "2024-10-30 20:40:26.212795"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Asajj Ventress"], ["description", "Ani? My goodness, you've grown."], ["unit_price", 55.0], ["merchant_id", 15], ["created_at", "2024-10-30 20:40:26.213617"], ["updated_at", "2024-10-30 20:40:26.213617"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."unit_price" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:40:26.220262"], ["updated_at", "2024-10-30 20:40:26.220262"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Ben Solo"], ["description", "The Shield is down! Commence attack on the Death Star's main reactor."], ["unit_price", 80.82], ["merchant_id", 16], ["created_at", "2024-10-30 20:40:26.220944"], ["updated_at", "2024-10-30 20:40:26.220944"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Count Dooku"], ["description", "Yoosa should follow me now, okeeday?"], ["unit_price", 78.26], ["merchant_id", 16], ["created_at", "2024-10-30 20:40:26.221624"], ["updated_at", "2024-10-30 20:40:26.221624"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.4ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Grand Moff Tarkin"], ["description", "Sorry to interrupt your playtime, Grumpy, but wouldn't you prefer a challenge?"], ["unit_price", 72.24], ["merchant_id", 16], ["created_at", "2024-10-30 20:40:26.222286"], ["updated_at", "2024-10-30 20:40:26.222286"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Grand Admiral Thrawn"], ["description", "I have a bad feeling about this."], ["unit_price", 34.09], ["merchant_id", 16], ["created_at", "2024-10-30 20:40:26.223120"], ["updated_at", "2024-10-30 20:40:26.223120"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:40:26.223818"], ["updated_at", "2024-10-30 20:40:26.223818"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 16], ["created_at", "2024-10-30 20:40:26.226675"], ["updated_at", "2024-10-30 20:40:26.226675"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started DELETE "/api/v1/items/35" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::ItemsController#destroy as HTML
+  Parameters: {"id"=>"35"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Destroy (2.3ms)[0m  [1m[31mDELETE FROM "items" WHERE "items"."id" = $1[0m  [["id", 35]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 204 No Content in 6ms (ActiveRecord: 2.6ms | Allocations: 4483)
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:40:26.242439"], ["updated_at", "2024-10-30 20:40:26.242439"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Kylo Ren"], ["description", "Why you slimy, double-crossing, no-good swindler. You've got a lot of guts coming here, after what you pulled."], ["unit_price", 44.96], ["merchant_id", 18], ["created_at", "2024-10-30 20:40:26.243190"], ["updated_at", "2024-10-30 20:40:26.243190"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.5ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Nute Gunray"], ["description", "I have a bad feeling about…"], ["unit_price", 53.02], ["merchant_id", 18], ["created_at", "2024-10-30 20:40:26.243848"], ["updated_at", "2024-10-30 20:40:26.243848"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Asajj Ventress"], ["description", "You will remove these restraints and leave this cell with the door open."], ["unit_price", 23.03], ["merchant_id", 18], ["created_at", "2024-10-30 20:40:26.244699"], ["updated_at", "2024-10-30 20:40:26.244699"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Ki-Adi-Mundi"], ["description", "Now don't you forget this! Why I should stick my neck out for you is far beyond my capacity!"], ["unit_price", 57.75], ["merchant_id", 18], ["created_at", "2024-10-30 20:40:26.245301"], ["updated_at", "2024-10-30 20:40:26.245301"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:40:26.245829"], ["updated_at", "2024-10-30 20:40:26.245829"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.0ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 18], ["created_at", "2024-10-30 20:40:26.246584"], ["updated_at", "2024-10-30 20:40:26.246584"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/items/40/merchant" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::ItemsMerchantController#index as HTML
+  Parameters: {"id"=>"40"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 887)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:40:26.249561"], ["updated_at", "2024-10-30 20:40:26.249561"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Vice Admiral Holdo"], ["description", "The Republic doesn't exist out here. We must survive on our own."], ["unit_price", 77.84], ["merchant_id", 20], ["created_at", "2024-10-30 20:40:26.250223"], ["updated_at", "2024-10-30 20:40:26.250223"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Captain Phasma"], ["description", "But I was going into Tosche Station to pick up some power converters!"], ["unit_price", 83.61], ["merchant_id", 20], ["created_at", "2024-10-30 20:40:26.250825"], ["updated_at", "2024-10-30 20:40:26.250825"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Anakin Skywalker"], ["description", "Oh Gooberfish!"], ["unit_price", 18.34], ["merchant_id", 20], ["created_at", "2024-10-30 20:40:26.251420"], ["updated_at", "2024-10-30 20:40:26.251420"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Poe Dameron"], ["description", "It's a trap!"], ["unit_price", 87.46], ["merchant_id", 20], ["created_at", "2024-10-30 20:40:26.251999"], ["updated_at", "2024-10-30 20:40:26.251999"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:40:26.252614"], ["updated_at", "2024-10-30 20:40:26.252614"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/items" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::ItemsController#index as HTML
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items"[0m
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 689)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:40:26.255076"], ["updated_at", "2024-10-30 20:40:26.255076"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Savage Opress"], ["description", "Your presence is like a violent storm in this quiet world."], ["unit_price", 22.32], ["merchant_id", 22], ["created_at", "2024-10-30 20:40:26.255689"], ["updated_at", "2024-10-30 20:40:26.255689"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Admiral Ackbar"], ["description", "You're smarter than a tree, aren't you?"], ["unit_price", 77.77], ["merchant_id", 22], ["created_at", "2024-10-30 20:40:26.256314"], ["updated_at", "2024-10-30 20:40:26.256314"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Kylo Ren"], ["description", "I won't have you question my methods."], ["unit_price", 12.81], ["merchant_id", 22], ["created_at", "2024-10-30 20:40:26.256893"], ["updated_at", "2024-10-30 20:40:26.256893"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Jar Jar Binks"], ["description", "You can run, but you'll only die tired."], ["unit_price", 59.39], ["merchant_id", 22], ["created_at", "2024-10-30 20:40:26.257474"], ["updated_at", "2024-10-30 20:40:26.257474"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:40:26.257952"], ["updated_at", "2024-10-30 20:40:26.257952"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 22], ["created_at", "2024-10-30 20:40:26.258739"], ["updated_at", "2024-10-30 20:40:26.258739"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/items/49" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::ItemsController#show as HTML
+  Parameters: {"id"=>"49"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 240)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:40:26.260330"], ["updated_at", "2024-10-30 20:40:26.260330"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Watto"], ["description", "Suicide is not the Jedi way, Master."], ["unit_price", 60.18], ["merchant_id", 24], ["created_at", "2024-10-30 20:40:26.260843"], ["updated_at", "2024-10-30 20:40:26.260843"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Luke Skywalker"], ["description", "I have a bad feeling about this."], ["unit_price", 85.47], ["merchant_id", 24], ["created_at", "2024-10-30 20:40:26.261423"], ["updated_at", "2024-10-30 20:40:26.261423"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.1ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Rose Tico"], ["description", "You have failed me for the last time, Admiral."], ["unit_price", 51.56], ["merchant_id", 24], ["created_at", "2024-10-30 20:40:26.262203"], ["updated_at", "2024-10-30 20:40:26.262203"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Boba Fett"], ["description", "War is in your blood. I studied the art of war, worked to perfect it, but you? You were forged by it."], ["unit_price", 47.81], ["merchant_id", 24], ["created_at", "2024-10-30 20:40:26.262774"], ["updated_at", "2024-10-30 20:40:26.262774"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:40:26.263286"], ["updated_at", "2024-10-30 20:40:26.263286"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started POST "/api/v1/items" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::ItemsController#create as HTML
+  Parameters: {"item"=>{"name"=>"Controller", "description"=>"Play videogames", "unit_price"=>50.99, "merchant_id"=>24}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Controller"], ["description", "Play videogames"], ["unit_price", 50.99], ["merchant_id", 24], ["created_at", "2024-10-30 20:40:26.265030"], ["updated_at", "2024-10-30 20:40:26.265030"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 900)
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Steve"], ["created_at", "2024-10-30 20:40:26.266418"], ["updated_at", "2024-10-30 20:40:26.266418"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Jyn Erso"], ["description", "I assume you need something. Desperately."], ["unit_price", 17.13], ["merchant_id", 26], ["created_at", "2024-10-30 20:40:26.267083"], ["updated_at", "2024-10-30 20:40:26.267083"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Rune Haako"], ["description", "An object cannot make you good, or evil. The temptation of power, forbidden knowledge, even the desire to do good can lead some down that path. But only you can change yourself."], ["unit_price", 58.13], ["merchant_id", 26], ["created_at", "2024-10-30 20:40:26.267744"], ["updated_at", "2024-10-30 20:40:26.267744"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Darth Vader"], ["description", "The garbage'll do"], ["unit_price", 93.24], ["merchant_id", 26], ["created_at", "2024-10-30 20:40:26.268348"], ["updated_at", "2024-10-30 20:40:26.268348"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Darth Vader"], ["description", "I am a Jedi, like my father before me."], ["unit_price", 29.48], ["merchant_id", 26], ["created_at", "2024-10-30 20:40:26.268958"], ["updated_at", "2024-10-30 20:40:26.268958"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Fake Merchant"], ["created_at", "2024-10-30 20:40:26.269472"], ["updated_at", "2024-10-30 20:40:26.269472"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "socks"], ["description", "keep feet warm"], ["unit_price", 99.99], ["merchant_id", 26], ["created_at", "2024-10-30 20:40:26.270417"], ["updated_at", "2024-10-30 20:40:26.270417"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/api/v1/items/59" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::ItemsController#update as HTML
+  Parameters: {"item"=>{"name"=>"Pants", "description"=>"they keep legs warm", "unit_price"=>2.0, "merchant_id"=>26}, "id"=>"59"}
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 59], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Update (0.4ms)[0m  [1m[33mUPDATE "items" SET "name" = $1, "description" = $2, "unit_price" = $3, "updated_at" = $4 WHERE "items"."id" = $5[0m  [["name", "Pants"], ["description", "they keep legs warm"], ["unit_price", 2.0], ["updated_at", "2024-10-30 20:40:26.271692"], ["id", 59]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 878)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Gnome Depot"], ["created_at", "2024-10-30 20:40:26.273377"], ["updated_at", "2024-10-30 20:40:26.273377"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bloodbath and Beyond"], ["created_at", "2024-10-30 20:40:26.273862"], ["updated_at", "2024-10-30 20:40:26.273862"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "The Philosopher's Scone"], ["created_at", "2024-10-30 20:40:26.274313"], ["updated_at", "2024-10-30 20:40:26.274313"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/api/v1/merchants/28" for 127.0.0.1 at 2024-10-30 14:40:26 -0600
+Processing by Api::V1::MerchantsController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.1ms | Allocations: 409)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
