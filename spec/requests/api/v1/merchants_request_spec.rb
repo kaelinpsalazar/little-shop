@@ -25,19 +25,19 @@ RSpec.describe "Mechant", type: :request do
     end
 
   describe "make a new merchant with #create" do
-        xit "creates a new merchant" do
+        it "creates a new merchant" do
             merchant_attributes = {name: "Gnome Depot"}
 
             post "/api/v1/merchants#create", params: {merchant: merchant_attributes}
 
-            merchant = JSON.parse(response.body, symbolize_names: true)[:data].first
+            merchant = JSON.parse(response.body, symbolize_names: true)[:data]
 
             expect(merchant[:attributes][:name]).to eq(merchant_attributes[:name])
         end
     end
 
   describe "edits a merchant with #update" do
-        xit "can update an existing merchant" do
+        it "can update an existing merchant" do
             id = Merchant.create(name: "Gnome Depot").id
 
             previous_name = Merchant.last.name
@@ -55,7 +55,7 @@ RSpec.describe "Mechant", type: :request do
     end
 
   describe "deletes a merchant with #delete" do
-       xit "can delete an existing merchant" do
+       it "can delete an existing merchant" do
 
             expect(Merchant.count).to eq(3)
 
