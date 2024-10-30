@@ -65,3 +65,39 @@ ActionController::ParameterMissing (param is missing or the value is empty: merc
   
 app/controllers/api/v1/merchants_controller.rb:10:in `merchant_params'
 app/controllers/api/v1/merchants_controller.rb:3:in `create'
+  [1m[36mActiveRecord::SchemaMigration Load (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (147.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_development"[0m
+  [1m[35m (33.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_test"[0m
+  [1m[35m (160.7ms)[0m  [1m[35mCREATE DATABASE "little_shop_development" ENCODING = 'unicode'[0m
+  [1m[35m (58.2ms)[0m  [1m[35mCREATE DATABASE "little_shop_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7448043059890211625)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-10-30 03:36:19.777398', '2024-10-30 03:36:19.777406') RETURNING "key"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7448043059890211625)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api/v1/merchants/42" for ::1 at 2024-10-30 12:48:54 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (5.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::MerchantsController#show as */*
+  Parameters: {"id"=>"42"}
+  [1m[36mMerchant Load (2.2ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:4:in `show'
+Completed 200 OK in 88ms (Views: 0.5ms | ActiveRecord: 86.4ms (1 query, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/api/v1/merchants/8923987297" for ::1 at 2024-10-30 12:48:54 -0600
+Processing by Api::V1::MerchantsController#show as */*
+  Parameters: {"id"=>"8923987297"}
+  [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:4:in `show'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
+  
+app/controllers/api/v1/merchants_controller.rb:4:in `show'
