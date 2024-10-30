@@ -30,6 +30,7 @@ describe Item do
 
       expect(Item.all.count).to eq(5)
     end
+  end
     
 RSpec.describe "Fetch All Items" do
   before do
@@ -55,6 +56,7 @@ RSpec.describe "Fetch All Items" do
       merchant: @fake_merchant
       )
   end
+end
 
   describe "get all with #index" do
     it "can get all items" do
