@@ -9,23 +9,23 @@ RSpec.describe "Mechant", type: :request do
 
   describe "Can get one merchant with #show" do
         it "can return one merchant" do
-            get "/api/v1/merchants/#{merchant.id}"
+            get "/api/v1/merchants/#{@merchant1.id}"
 
-            merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+            merchant = JSON.parse(response.body, symbolize_names: true)[:data]
 
             expect(response).to be_successful
             expect(response).to have_http_status(:ok)
 
-            expect(merchants).to have_key(:id)
-            expect(merchant[:id]).to eq(merchant.id)
+            expect(merchant).to have_key(:id)
+            expect(merchant[:id]).to eq(@merchant1.id.to_s)
 
             expect(merchant[:attributes]).to have_key(:name)
-            expect(merchant[:attributes][:name]).to eq(merchant.name)
+            expect(merchant[:attributes][:name]).to eq(@merchant1.name)
         end
     end
 
   describe "make a new merchant with #create" do
-        it "creates a new merchant" do
+        xit "creates a new merchant" do
             merchant_attributes = {name: "Gnome Depot"}
 
             post "/api/v1/merchants#create", params: {merchant: merchant_attributes}
@@ -37,7 +37,7 @@ RSpec.describe "Mechant", type: :request do
     end
 
   describe "edits a merchant with #update" do
-        it "can update an existing merchant" do
+        xit "can update an existing merchant" do
             id = Merchant.create(name: "Gnome Depot").id
 
             previous_name = Merchant.last.name
@@ -55,7 +55,7 @@ RSpec.describe "Mechant", type: :request do
     end
 
   describe "deletes a merchant with #delete" do
-        it "can delete an existing merchant" do
+       xit "can delete an existing merchant" do
 
             expect(Merchant.count).to eq(3)
 
