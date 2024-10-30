@@ -57,7 +57,7 @@ RSpec.describe "Items API", type: :request do
         name: "Controller",
         description: "Play videogames",
         unit_price: 50.99,
-        merchant_id: Merchant.first.id
+        merchant_id: @merchant.id
       }
 
       headers = { "CONTENT_TYPE" => "application/json" }
@@ -65,6 +65,7 @@ RSpec.describe "Items API", type: :request do
       expect(Item.all.count).to eq(4)
 
       post "/api/v1/items", headers: headers, params: JSON.generate(item: new_item_params)
+
 
       created_item = JSON.parse(response.body, symbolize_names: true)
       expect(response).to be_successful
@@ -120,7 +121,33 @@ RSpec.describe "Items API", type: :request do
       delete "/api/v1/items/#{item.id}"
       expect(response).to be_successful
 
+      expect(Item.all.count).to eq(4)
+
+
       expect(Item.find_by(id: item.id)).to be_nil
 
   end
+
+  it "can find the merchant information tied to a specific ID" do
+    item = Item.create(
+        name: "socks",
+        description: "keep feet warm",
+        unit_price: 99.99,
+        merchant_id: @merchant.id
+      )
+    get "/api/v1/items/#{item.id}/merchant"
+
+    expect(response).to be_successful
+    expect(response).to have_http_status(200) 
+
+    merchant_info = JSON.parse(response.body, symbolize_names: true)
+
+  expect(merchant_info[:data]).to have_key(:id) 
+  expect(merchant_info[:data][:attributes]).to have_key(:name) 
+  expect(merchant_info[:data][:attributes][:name]).to eq(@merchant.name) 
+
+
+
+  end
+  
 end
