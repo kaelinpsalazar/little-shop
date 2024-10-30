@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get '/api/v1/items', to: 'api/v1/items#index'
   # Defines the root path route ("/")
   # root "posts#index"
+
+  post "/api/v1/items", to: "api/v1/items#create"
 end

@@ -230,6 +230,15 @@
       "/Users/sethverrill/turing_work/mod2/2408/little-shop/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
           null,
           1,
           1,
@@ -262,6 +271,6 @@
         ]
       }
     },
-    "timestamp": 1730246712
+    "timestamp": 1730248554
   }
 }

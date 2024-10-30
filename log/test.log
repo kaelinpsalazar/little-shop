@@ -1,0 +1,321 @@
+  [1m[35m (79.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_test"[0m
+  [1m[35m (164.5ms)[0m  [1m[35mCREATE DATABASE "little_shop_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (13.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "customers" CASCADE[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "first_name" character varying, "last_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "invoice_items" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "invoice_items" ("id" bigserial primary key, "item_id" bigint, "invoice_id" bigint, "quantity" integer, "unit_price" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_invoice_items_on_invoice_id" ON "invoice_items" ("invoice_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_invoice_items_on_item_id" ON "invoice_items" ("item_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "invoices" CASCADE[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "invoices" ("id" bigserial primary key, "customer_id" bigint, "merchant_id" bigint, "status" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_invoices_on_customer_id" ON "invoices" ("customer_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_invoices_on_merchant_id" ON "invoices" ("merchant_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "items" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "items" ("id" bigserial primary key, "name" character varying, "description" character varying, "unit_price" float, "merchant_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_items_on_merchant_id" ON "items" ("merchant_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "merchants" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "merchants" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "transactions" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" bigserial primary key, "invoice_id" bigint, "credit_card_number" character varying, "credit_card_expiration_date" character varying, "result" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_invoice_id" ON "transactions" ("invoice_id")[0m
+  [1m[35m (3.4ms)[0m  [1m[35mALTER TABLE "invoice_items" ADD CONSTRAINT "fk_rails_25bf3d2c5e"
+FOREIGN KEY ("invoice_id")
+  REFERENCES "invoices" ("id")
+[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "invoice_items" ADD CONSTRAINT "fk_rails_99f31d79ba"
+FOREIGN KEY ("item_id")
+  REFERENCES "items" ("id")
+[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "invoices" ADD CONSTRAINT "fk_rails_0d349e632f"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "invoices" ADD CONSTRAINT "fk_rails_b692866c6a"
+FOREIGN KEY ("merchant_id")
+  REFERENCES "merchants" ("id")
+[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "items" ADD CONSTRAINT "fk_rails_ba3b0b4b5e"
+FOREIGN KEY ("merchant_id")
+  REFERENCES "merchants" ("id")
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "transactions" ADD CONSTRAINT "fk_rails_6b611ee905"
+FOREIGN KEY ("invoice_id")
+  REFERENCES "invoices" ("id")
+[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-10-29 23:31:50.914530', '2024-10-29 23:31:50.914536') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '653f2278def3d78ee5042b3615d764711731d29d', '2024-10-29 23:31:50.917660', '2024-10-29 23:31:50.917661') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (14.5ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Rose Tico"], ["created_at", "2024-10-30 00:10:27.705822"], ["updated_at", "2024-10-30 00:10:27.705822"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Han Solo"], ["created_at", "2024-10-30 00:10:27.721477"], ["updated_at", "2024-10-30 00:10:27.721477"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lando Calrissian"], ["created_at", "2024-10-30 00:10:27.722316"], ["updated_at", "2024-10-30 00:10:27.722316"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Admiral Ackbar"], ["created_at", "2024-10-30 00:10:27.722813"], ["updated_at", "2024-10-30 00:10:27.722813"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Count (3.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "merchants"[0m
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (1.5ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Jabba the Hutt"], ["created_at", "2024-10-30 00:14:14.863321"], ["updated_at", "2024-10-30 00:14:14.863321"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Greedo"], ["created_at", "2024-10-30 00:14:14.865659"], ["updated_at", "2024-10-30 00:14:14.865659"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Rey"], ["created_at", "2024-10-30 00:14:14.866251"], ["updated_at", "2024-10-30 00:14:14.866251"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kylo Ren"], ["created_at", "2024-10-30 00:14:14.866702"], ["updated_at", "2024-10-30 00:14:14.866702"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "merchants"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.8ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sheev Palpatine"], ["created_at", "2024-10-30 00:15:03.450901"], ["updated_at", "2024-10-30 00:15:03.450901"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kanan Jarrus"], ["created_at", "2024-10-30 00:15:03.452561"], ["updated_at", "2024-10-30 00:15:03.452561"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Grand Admiral Thrawn"], ["created_at", "2024-10-30 00:15:03.453137"], ["updated_at", "2024-10-30 00:15:03.453137"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bendu"], ["created_at", "2024-10-30 00:15:03.453737"], ["updated_at", "2024-10-30 00:15:03.453737"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "merchants"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.7ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Grand Moff Tarkin"], ["created_at", "2024-10-30 00:16:27.813458"], ["updated_at", "2024-10-30 00:16:27.813458"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.5ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Grand Moff Tarkin"], ["created_at", "2024-10-30 00:16:27.815178"], ["updated_at", "2024-10-30 00:16:27.815178"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Saw Gerrera"], ["created_at", "2024-10-30 00:16:27.816217"], ["updated_at", "2024-10-30 00:16:27.816217"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Vice Admiral Holdo"], ["created_at", "2024-10-30 00:16:27.816925"], ["updated_at", "2024-10-30 00:16:27.816925"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "merchants"[0m
+Started POST "/api/v1/merchants" for 127.0.0.1 at 2024-10-29 18:16:27 -0600
+Processing by Api::V1::MerchantsController#create as HTML
+  Parameters: {"merchant"=>{"name"=>"kaelin"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "kaelin"], ["created_at", "2024-10-30 00:16:27.828220"], ["updated_at", "2024-10-30 00:16:27.828220"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 4ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (14.4ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Mon Mothma"], ["created_at", "2024-10-30 00:17:35.473352"], ["updated_at", "2024-10-30 00:17:35.473352"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Grand Moff Tarkin"], ["created_at", "2024-10-30 00:17:35.488684"], ["updated_at", "2024-10-30 00:17:35.488684"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Chirrut Imwe"], ["created_at", "2024-10-30 00:17:35.489337"], ["updated_at", "2024-10-30 00:17:35.489337"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Shmi Skywalker"], ["created_at", "2024-10-30 00:17:35.489821"], ["updated_at", "2024-10-30 00:17:35.489821"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "merchants"[0m
+Started POST "/api/v1/merchants" for 127.0.0.1 at 2024-10-29 18:17:35 -0600
+Processing by Api::V1::MerchantsController#create as HTML
+  Parameters: {"merchant"=>{"name"=>"kaelin"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "kaelin"], ["created_at", "2024-10-30 00:17:35.500185"], ["updated_at", "2024-10-30 00:17:35.500185"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 4ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mMerchant Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "merchants"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (1.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Mace Windu"], ["created_at", "2024-10-30 00:29:45.259692"], ["updated_at", "2024-10-30 00:29:45.259692"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (16.0ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Ezra Bridger"], ["description", "I felt a great disturbance in the Force, as if millions of voices suddenly cried out in terror and were suddenly silenced."], ["unit_price", 17.11], ["merchant_id", 23], ["created_at", "2024-10-30 00:29:45.263161"], ["updated_at", "2024-10-30 00:29:45.263161"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Maz Kanata"], ["created_at", "2024-10-30 00:29:45.279938"], ["updated_at", "2024-10-30 00:29:45.279938"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.8ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Jango Fett"], ["description", "Hassa ba una kulkee malia... (What if everyone who smuggled for me… eveela deesa… their cargo at the sight… dwa spasteega el was nwo yana da gooloo? (of an Imperial starship?)"], ["unit_price", 12.74], ["merchant_id", 24], ["created_at", "2024-10-30 00:29:45.280532"], ["updated_at", "2024-10-30 00:29:45.280532"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Admiral Ackbar"], ["created_at", "2024-10-30 00:29:45.281943"], ["updated_at", "2024-10-30 00:29:45.281943"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.4ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Bendu"], ["description", "You're smarter than a tree, aren't you?"], ["unit_price", 53.52], ["merchant_id", 25], ["created_at", "2024-10-30 00:29:45.282475"], ["updated_at", "2024-10-30 00:29:45.282475"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sebulba"], ["created_at", "2024-10-30 00:29:45.283301"], ["updated_at", "2024-10-30 00:29:45.283301"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Bendu"], ["description", "So this is how liberty dies. With thunderous applause."], ["unit_price", 32.06], ["merchant_id", 26], ["created_at", "2024-10-30 00:29:45.283784"], ["updated_at", "2024-10-30 00:29:45.283784"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.2ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" ORDER BY "merchants"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started POST "/api/v1/items" for 127.0.0.1 at 2024-10-29 18:29:45 -0600
+  
+ActionController::RoutingError (No route matches [POST] "/api/v1/items"):
+  
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (1.6ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lando Calrissian"], ["created_at", "2024-10-30 00:32:28.259692"], ["updated_at", "2024-10-30 00:32:28.259692"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (1.6ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Panaka"], ["description", "It's not impossible. I used to bullseye womp rats in my T-16 back home; they're not much bigger than two meters."], ["unit_price", 47.61], ["merchant_id", 27], ["created_at", "2024-10-30 00:32:28.264464"], ["updated_at", "2024-10-30 00:32:28.264464"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Bendu"], ["created_at", "2024-10-30 00:32:28.266871"], ["updated_at", "2024-10-30 00:32:28.266871"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Supreme Leader Snoke"], ["description", "Ee mara tom tee tok maky cheesa. (You should have paid him when you had the chance.)"], ["unit_price", 84.21], ["merchant_id", 28], ["created_at", "2024-10-30 00:32:28.267426"], ["updated_at", "2024-10-30 00:32:28.267426"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Kanan Jarrus"], ["created_at", "2024-10-30 00:32:28.268238"], ["updated_at", "2024-10-30 00:32:28.268238"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Greedo"], ["description", "But how could they be jamming us if they don't know that we're coming?"], ["unit_price", 16.98], ["merchant_id", 29], ["created_at", "2024-10-30 00:32:28.268713"], ["updated_at", "2024-10-30 00:32:28.268713"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.3ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Jabba the Hutt"], ["created_at", "2024-10-30 00:32:28.269515"], ["updated_at", "2024-10-30 00:32:28.269515"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Ezra Bridger"], ["description", "Twice the pride, double the fall."], ["unit_price", 95.68], ["merchant_id", 30], ["created_at", "2024-10-30 00:32:28.270096"], ["updated_at", "2024-10-30 00:32:28.270096"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.2ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" ORDER BY "merchants"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started POST "/api/v1/items" for 127.0.0.1 at 2024-10-29 18:32:28 -0600
+Processing by Api::V1::ItemsController#create as HTML
+  Parameters: {"item"=>{"name"=>"Controller", "description"=>"Play videogames", "unit_price"=>50.99, "merchant_id"=>27}}
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  
+ActionController::ParameterMissing (param is missing or the value is empty: merchant):
+  
+app/controllers/api/v1/items_controller.rb:9:in `item_params'
+app/controllers/api/v1/items_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (1.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Lando Calrissian"], ["created_at", "2024-10-30 00:34:47.508111"], ["updated_at", "2024-10-30 00:34:47.508111"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (1.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Kanan Jarrus"], ["description", "You can't stop change any more than you can stop the suns from setting."], ["unit_price", 99.36], ["merchant_id", 31], ["created_at", "2024-10-30 00:34:47.511792"], ["updated_at", "2024-10-30 00:34:47.511792"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Grand Admiral Thrawn"], ["created_at", "2024-10-30 00:34:47.513648"], ["updated_at", "2024-10-30 00:34:47.513648"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Vice Admiral Holdo"], ["description", "Remember, your focus determines your reality."], ["unit_price", 33.22], ["merchant_id", 32], ["created_at", "2024-10-30 00:34:47.514130"], ["updated_at", "2024-10-30 00:34:47.514130"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Watto"], ["created_at", "2024-10-30 00:34:47.514699"], ["updated_at", "2024-10-30 00:34:47.514699"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Qui-Gon Jinn"], ["description", "The Republic doesn't exist out here. We must survive on our own."], ["unit_price", 62.55], ["merchant_id", 33], ["created_at", "2024-10-30 00:34:47.515096"], ["updated_at", "2024-10-30 00:34:47.515096"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.1ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Anakin Skywalker"], ["created_at", "2024-10-30 00:34:47.515626"], ["updated_at", "2024-10-30 00:34:47.515626"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.4ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Rose Tico"], ["description", "Hassa ba una kulkee malia... (What if everyone who smuggled for me… eveela deesa… their cargo at the sight… dwa spasteega el was nwo yana da gooloo? (of an Imperial starship?)"], ["unit_price", 61.65], ["merchant_id", 34], ["created_at", "2024-10-30 00:34:47.516040"], ["updated_at", "2024-10-30 00:34:47.516040"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" ORDER BY "merchants"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started POST "/api/v1/items" for 127.0.0.1 at 2024-10-29 18:34:47 -0600
+Processing by Api::V1::ItemsController#create as HTML
+  Parameters: {"item"=>{"name"=>"Controller", "description"=>"Play videogames", "unit_price"=>50.99, "merchant_id"=>31}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.2ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  [1m[36mItem Create (10.5ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Controller"], ["description", "Play videogames"], ["unit_price", 50.99], ["merchant_id", 31], ["created_at", "2024-10-30 00:34:47.531501"], ["updated_at", "2024-10-30 00:34:47.531501"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 10.9ms (2 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.9ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Saw Gerrera"], ["created_at", "2024-10-30 00:35:54.945481"], ["updated_at", "2024-10-30 00:35:54.945481"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (1.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Jango Fett"], ["description", "The Republic doesn't exist out here. We must survive on our own."], ["unit_price", 10.92], ["merchant_id", 35], ["created_at", "2024-10-30 00:35:54.949066"], ["updated_at", "2024-10-30 00:35:54.949066"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Sheev Palpatine"], ["created_at", "2024-10-30 00:35:54.951005"], ["updated_at", "2024-10-30 00:35:54.951005"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.4ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Jar Jar Binks"], ["description", "Why, you stuck-up, half-witted, scruffy-looking nerf herder!"], ["unit_price", 19.76], ["merchant_id", 36], ["created_at", "2024-10-30 00:35:54.951602"], ["updated_at", "2024-10-30 00:35:54.951602"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Mace Windu"], ["created_at", "2024-10-30 00:35:54.952397"], ["updated_at", "2024-10-30 00:35:54.952397"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Mace Windu"], ["description", "Mesa cause one, two-y little bitty axadentes, huh? Yud say boom de gasser, den crashin der bosses heyblibber, den banished."], ["unit_price", 86.34], ["merchant_id", 37], ["created_at", "2024-10-30 00:35:54.952895"], ["updated_at", "2024-10-30 00:35:54.952895"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Create (0.2ms)[0m  [1m[32mINSERT INTO "merchants" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Padme Amidala"], ["created_at", "2024-10-30 00:35:54.953627"], ["updated_at", "2024-10-30 00:35:54.953627"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mItem Create (0.3ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Nute Gunray"], ["description", "I will start my operations here, and pull the rebels apart piece by piece. They'll be the architects of their own destruction."], ["unit_price", 43.47], ["merchant_id", 38], ["created_at", "2024-10-30 00:35:54.954117"], ["updated_at", "2024-10-30 00:35:54.954117"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" ORDER BY "merchants"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+Started POST "/api/v1/items" for 127.0.0.1 at 2024-10-29 18:35:54 -0600
+Processing by Api::V1::ItemsController#create as HTML
+  Parameters: {"item"=>{"name"=>"Controller", "description"=>"Play videogames", "unit_price"=>50.99, "merchant_id"=>35}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mMerchant Load (0.1ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 35], ["LIMIT", 1]]
+  [1m[36mItem Create (0.2ms)[0m  [1m[32mINSERT INTO "items" ("name", "description", "unit_price", "merchant_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Controller"], ["description", "Play videogames"], ["unit_price", 50.99], ["merchant_id", 35], ["created_at", "2024-10-30 00:35:54.967533"], ["updated_at", "2024-10-30 00:35:54.967533"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 6ms (Views: 0.1ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
