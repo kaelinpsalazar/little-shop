@@ -195,9 +195,9 @@
           null,
           1,
           1,
-          1,
-          1,
-          1,
+          5,
+          5,
+          5,
           1,
           null,
           null
@@ -235,40 +235,8 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/spec/requests/api/v1/merchants_request_spec.rb": {
+      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/models/item.rb": {
         "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/models/merchant.rb": {
-        "lines": [
-          1,
           1,
           1,
           1,
@@ -282,7 +250,21 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/controllers/api/v1/merchants_controller.rb": {
+      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/spec/requests/api/v1/merchants_request_spec.rb": {
+        "lines": [
+
+        ]
+      },
+      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/controllers/api/v1/items_controller.rb": {
         "lines": [
           1,
           1,
@@ -291,9 +273,9 @@
           null,
           null,
           1,
+          1,
+          1,
           null,
-          1,
-          1,
           null,
           null
         ]
@@ -304,17 +286,19 @@
           null
         ]
       },
-      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/serializers/merchant_serializer.rb": {
+      "/Users/kaelinsalazar/turing_projects/2-mod/little_shop/app/serializers/item_serializer.rb": {
         "lines": [
           1,
           1,
           null,
           1,
           null,
+          null,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1730247455
+    "timestamp": 1730248554
   }
 }
