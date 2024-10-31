@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   
   get '/api/v1/items', to: 'api/v1/items#index'
   get '/api/v1/items/:id', to: 'api/v1/items#show'
+  get '/api/v1/merchants/:id/items', to: 'api/v1/merchant_items#index'
   post "/api/v1/items", to: "api/v1/items#create"
   post "/api/v1/merchants", to: "api/v1/merchants#create"
   patch "/api/v1/items/:id", to: "api/v1/items#update"
