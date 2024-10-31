@@ -15,8 +15,19 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.create!(item_params)
-    render json: ItemSerializer.new(item), status: :created
+    begin
+      item = Item.create!(item_params)
+      render json: ItemSerializer.new(item), status: :created
+    rescue ActiveRecord::RecordInvalid => exception
+      render json: {
+        errors: [
+          {
+            status: "422",
+            message: "Error: All attributes must be included"
+          }
+        ]
+      }, status: :unprocessable_entity
+    end
   end
 
   def update
