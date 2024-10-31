@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Items API", type: :request do
+  
   before(:each) do
     @merchant = Merchant.create!(name: "Steve")
     create_list(:item, 4, merchant: @merchant)
@@ -161,6 +162,32 @@ RSpec.describe "Items API", type: :request do
     expect(merchant_info[:data]).to have_key(:id) 
     expect(merchant_info[:data][:attributes]).to have_key(:name) 
     expect(merchant_info[:data][:attributes][:name]).to eq(@merchant.name)
+  end
+
+  describe "sad paths" do
+    it "will return an error if all endpoints are not included" do
+      item_params = {
+        name: "",
+        description: "",
+        unit_price: nil,
+        merchant_id: @merchant.id
+      }
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+      expect(response).to_not be_successful
+      expect(response.status).to eq(422)
+
+
+      created_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(created_item[:errors]).to be_a(Array)
+      expect(created_item[:errors].first[:status]).to eq("422")
+      expect(created_item[:errors].first[:message]).to eq("Error: All attributes must be included")
+
+
+    end
   end
   
 end
