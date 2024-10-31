@@ -97,5 +97,27 @@ RSpec.describe "Mechant", type: :request do
         expect(item[:attributes][:merchant_id]).to eq(@merchant1.id)
       end
       end
+
+    describe "can find customers for merchant ID" do
+        it "returns customer name if given merchant ID" do
+            customer = Customer.create( 
+                first_name: "Mary", 
+                last_name: "Shelley" 
+                )
+            Invoice.create!(merchant: @merchant1, customer: customer)
+            get "/api/v1/merchants/#{@merchant1.id}/customers" 
+            
+            expect(response).to be_successful 
+            expect(response).to have_http_status(200)
+                        
+            customer_info = JSON.parse(response.body, symbolize_names: true)
+
+            expect(customer_info[:data]).to be_an(Array)
+            customer1 = customer_info[:data].first            
+            
+            expect(customer1).to have_key(:id)
+            expect(customer1[:attributes]).to have_key(:first_name) 
+            expect(customer1[:attributes]).to have_key(:last_name)
+        end
     end
 end
