@@ -6,8 +6,11 @@ RSpec.describe "Mechant", type: :request do
         @merchant2 = Merchant.create!(name: "Bloodbath and Beyond")
         @merchant3 = Merchant.create!(name: "The Philosopher's Scone")
     end
+
   describe "Can get all merchants with #index" do
       it "Can return all merchants" do
+        get "/api/v1/merchants"
+        
         expect(response).to be_successful
 
         merchant = JSON.parse(response.body, symbolize_names: true)[:data]
@@ -23,6 +26,7 @@ RSpec.describe "Mechant", type: :request do
         end
       end
   end
+
   describe "Can get one merchant with #show" do
         it "can return one merchant" do
             get "/api/v1/merchants/#{@merchant1.id}"
