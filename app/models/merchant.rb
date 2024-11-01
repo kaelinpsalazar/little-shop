@@ -8,15 +8,13 @@ class Merchant < ApplicationRecord
   end
 
   def self.with_returned_status
-    joins(:invoices).where(invoices: { status: 'returend'}).distinct
+    joins(:invoices).where(invoices: { status: 'returned' }).distinct
   end
 
   def self.with_item_count
-    merchants = Merchant.includes(:items)
-    merchants.map do |merchant|
-      merchant.attributes.merge('item_count => merchant.itmes.size')
-    end
-
+    select("merchants.*, COUNT(items.id) AS item_count")
+      .left_joins(:items)
+      .group("merchants.id")
   end
 
   def self.fetch_merchants(params)
@@ -27,7 +25,7 @@ class Merchant < ApplicationRecord
     elseif params[:count] == 'true'
       with_item_count
     else
-      all 
+      Merchant.all 
     end
   end
 end

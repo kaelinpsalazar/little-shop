@@ -777,3 +777,81 @@ Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 538)
 ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
   
 app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+Started GET "/api/v1/merchants" for ::1 at 2024-10-31 14:58:24 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (4.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::MerchantsController#index as */*
+  [1m[36mMerchant Load (9.5ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 75ms (Views: 18.1ms | ActiveRecord: 30.7ms | Allocations: 25629)
+
+
+Started GET "/api/v1/merchants" for ::1 at 2024-10-31 14:58:24 -0600
+Processing by Api::V1::MerchantsController#index as */*
+Started GET "/api/v1/merchants?count=true" for ::1 at 2024-10-31 14:58:25 -0600
+  [1m[36mMerchant Load (0.7ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.7ms | Allocations: 4465)
+
+
+Started GET "/api/v1/merchants?sorted=age" for ::1 at 2024-10-31 14:58:25 -0600
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"count"=>"true"}
+  [1m[36mMerchant Load (0.4ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.4ms | Allocations: 4115)
+
+
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"sorted"=>"age"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 269)
+
+
+  
+NoMethodError (undefined method `elseif' for Merchant:Class):
+  
+app/models/merchant.rb:23:in `fetch_merchants'
+app/controllers/api/v1/merchants_controller.rb:4:in `index'
+Started GET "/api/v1/merchants?status=returned" for ::1 at 2024-10-31 14:58:25 -0600
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"status"=>"returned"}
+  [1m[36mMerchant Load (0.4ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.4ms | Allocations: 4087)
+
+
+Started GET "/api/v1/merchants/86/invoices" for ::1 at 2024-10-31 14:58:57 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/merchants/86/invoices"):
+  
+Started GET "/api/v1/merchants/8923987297/invoices" for ::1 at 2024-10-31 14:58:57 -0600
+Started GET "/api/v1/merchants/86/invoices?status=packaged" for ::1 at 2024-10-31 14:58:57 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/merchants/8923987297/invoices"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/merchants/86/invoices"):
+  
+Started GET "/api/v1/merchants/4/customers" for ::1 at 2024-10-31 14:59:01 -0600
+Processing by Api::V1::MerchantsCustomersController#index as */*
+  Parameters: {"merchant_id"=>"4"}
+  [1m[36mMerchant Load (0.4ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+  [1m[36mCustomer Load (12.0ms)[0m  [1m[34mSELECT "customers".* FROM "customers" INNER JOIN "invoices" ON "customers"."id" = "invoices"."customer_id" WHERE "invoices"."merchant_id" = $1 /* loading for inspect */ LIMIT $2[0m  [["merchant_id", 4], ["LIMIT", 11]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:7:in `index'
+  [1m[36mCustomer Load (4.6ms)[0m  [1m[34mSELECT "customers".* FROM "customers" INNER JOIN "invoices" ON "customers"."id" = "invoices"."customer_id" WHERE "invoices"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:8:in `index'
+Completed 200 OK in 104ms (Views: 9.9ms | ActiveRecord: 34.9ms | Allocations: 19700)
+
+
+Started GET "/api/v1/merchants/8923987297/customers" for ::1 at 2024-10-31 14:59:01 -0600
+Processing by Api::V1::MerchantsCustomersController#index as */*
+  Parameters: {"merchant_id"=>"8923987297"}
+  [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+Completed 404 Not Found in 11ms (ActiveRecord: 0.3ms | Allocations: 519)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
+  
+app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
