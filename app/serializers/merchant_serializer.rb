@@ -1,10 +1,10 @@
 class MerchantSerializer
   include JSONAPI::Serializer
 
-  attributes :name
+  attributes :name, :item_count
 
-  attribute :item_count do |merchant, params|
-    params[:include_item_count] ? merchant.item_count : nil
+  def item_count
+    object.items.count
   end
-  
 end
+  

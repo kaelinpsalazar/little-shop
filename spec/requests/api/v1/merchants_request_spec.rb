@@ -116,7 +116,8 @@ RSpec.describe "Mechant", type: :request do
         expect(item[:attributes]).to have_key(:merchant_id)
         expect(item[:attributes][:merchant_id]).to eq(@merchant1.id)
       end
-      end
+    end
+  end
 
     describe "can find customers for merchant ID" do
         it "returns customer name if given merchant ID" do

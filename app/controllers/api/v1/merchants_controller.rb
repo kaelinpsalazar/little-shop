@@ -1,12 +1,13 @@
 class Api::V1::MerchantsController < ApplicationController
 
     def index
-      merchant = Merchant.fetch_merchants(params)
-      render json: MerchantSerializer.new(merchant)
+      merchants = Merchant.fetch_merchants(params)
+      render json: MerchantSerializer.new(merchants)
     end
 
     def show 
-        render json: MerchantSerializer.new(Merchant.find(params[:id]))
+      merchant = Merchant.with_item_count.find(params[:id])
+        render json: MerchantSerializer.new(merchant)
     end
 
     def create

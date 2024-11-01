@@ -18,14 +18,19 @@ class Merchant < ApplicationRecord
   end
 
   def self.fetch_merchants(params)
-    if params[:sorted] == 'age'
-      sorted_by_created_at
-    elseif params[:status] == 'returned'
-      with_returned_status
-    elseif params[:count] == 'true'
-      with_item_count
-    else
-      Merchant.all 
-    end
+    merchants = if params[:sorted] == 'age'
+                  sorted_by_created_at
+                elsif params[:status] == 'returned'
+                  with_returned_status
+                else
+                  Merchant.all
+                end
+    merchants = merchants.with_item_count 
+    merchants 
+  end
+
+  
+  def item_count
+    items.count
   end
 end
