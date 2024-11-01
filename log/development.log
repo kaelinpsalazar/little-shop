@@ -777,3 +777,966 @@ Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 538)
 ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
   
 app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+Started GET "/api/v1/merchants" for ::1 at 2024-10-31 14:58:24 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (4.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::MerchantsController#index as */*
+  [1m[36mMerchant Load (9.5ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 75ms (Views: 18.1ms | ActiveRecord: 30.7ms | Allocations: 25629)
+
+
+Started GET "/api/v1/merchants" for ::1 at 2024-10-31 14:58:24 -0600
+Processing by Api::V1::MerchantsController#index as */*
+Started GET "/api/v1/merchants?count=true" for ::1 at 2024-10-31 14:58:25 -0600
+  [1m[36mMerchant Load (0.7ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.7ms | Allocations: 4465)
+
+
+Started GET "/api/v1/merchants?sorted=age" for ::1 at 2024-10-31 14:58:25 -0600
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"count"=>"true"}
+  [1m[36mMerchant Load (0.4ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.4ms | Allocations: 4115)
+
+
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"sorted"=>"age"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 269)
+
+
+  
+NoMethodError (undefined method `elseif' for Merchant:Class):
+  
+app/models/merchant.rb:23:in `fetch_merchants'
+app/controllers/api/v1/merchants_controller.rb:4:in `index'
+Started GET "/api/v1/merchants?status=returned" for ::1 at 2024-10-31 14:58:25 -0600
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"status"=>"returned"}
+  [1m[36mMerchant Load (0.4ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.4ms | Allocations: 4087)
+
+
+Started GET "/api/v1/merchants/86/invoices" for ::1 at 2024-10-31 14:58:57 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/merchants/86/invoices"):
+  
+Started GET "/api/v1/merchants/8923987297/invoices" for ::1 at 2024-10-31 14:58:57 -0600
+Started GET "/api/v1/merchants/86/invoices?status=packaged" for ::1 at 2024-10-31 14:58:57 -0600
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/merchants/8923987297/invoices"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/merchants/86/invoices"):
+  
+Started GET "/api/v1/merchants/4/customers" for ::1 at 2024-10-31 14:59:01 -0600
+Processing by Api::V1::MerchantsCustomersController#index as */*
+  Parameters: {"merchant_id"=>"4"}
+  [1m[36mMerchant Load (0.4ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+  [1m[36mCustomer Load (12.0ms)[0m  [1m[34mSELECT "customers".* FROM "customers" INNER JOIN "invoices" ON "customers"."id" = "invoices"."customer_id" WHERE "invoices"."merchant_id" = $1 /* loading for inspect */ LIMIT $2[0m  [["merchant_id", 4], ["LIMIT", 11]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:7:in `index'
+  [1m[36mCustomer Load (4.6ms)[0m  [1m[34mSELECT "customers".* FROM "customers" INNER JOIN "invoices" ON "customers"."id" = "invoices"."customer_id" WHERE "invoices"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:8:in `index'
+Completed 200 OK in 104ms (Views: 9.9ms | ActiveRecord: 34.9ms | Allocations: 19700)
+
+
+Started GET "/api/v1/merchants/8923987297/customers" for ::1 at 2024-10-31 14:59:01 -0600
+Processing by Api::V1::MerchantsCustomersController#index as */*
+  Parameters: {"merchant_id"=>"8923987297"}
+  [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+Completed 404 Not Found in 11ms (ActiveRecord: 0.3ms | Allocations: 519)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
+  
+app/controllers/api/v1/merchants_customers_controller.rb:4:in `index'
+Started GET "/api/v1/merchants" for ::1 at 2024-11-01 10:07:09 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (19.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::MerchantsController#index as */*
+  [1m[36mMerchant Load (18.8ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" GROUP BY "merchants"."id"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+  [1m[36mItem Count (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 55]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 27]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 23]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 56]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 91]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 58]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 8]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 87]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 74]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 54]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 29]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 71]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 68]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 34]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 51]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 96]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 80]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 70]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 52]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 83]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 67]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 63]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 90]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 10]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 35]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 45]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 6]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 86]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 84]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 39]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 92]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 93]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 89]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 69]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 36]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 31]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 50]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 60]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 97]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 14]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 66]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 22]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 59]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 13]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 65]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 2]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 16]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 62]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 75]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 98]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 73]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 44]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 11]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 99]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 42]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 88]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 82]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 41]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 46]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 40]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 43]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 53]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 32]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 9]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 7]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 100]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 38]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 15]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 79]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 48]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 26]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 12]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 85]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 72]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 95]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 78]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 57]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 24]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 81]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 61]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 19]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 77]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 25]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 94]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 30]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 21]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 49]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 47]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 3]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 17]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 28]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 37]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 20]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 33]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 1]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 76]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 5]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 18]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 64]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Completed 200 OK in 179ms (Views: 66.4ms | ActiveRecord: 76.3ms | Allocations: 81769)
+
+
+Started GET "/api/v1/merchants" for ::1 at 2024-11-01 10:07:09 -0600
+Processing by Api::V1::MerchantsController#index as */*
+Started GET "/api/v1/merchants?count=true" for ::1 at 2024-11-01 10:07:09 -0600
+  [1m[36mMerchant Load (7.3ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" GROUP BY "merchants"."id"[0m
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 55]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Started GET "/api/v1/merchants?sorted=age" for ::1 at 2024-11-01 10:07:09 -0600
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 27]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 23]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 56]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 91]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 58]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 8]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 87]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"count"=>"true"}
+  [1m[36mItem Count (2.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 74]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 54]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 29]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 71]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 68]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 34]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 51]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 96]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 80]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 70]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 52]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 83]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 67]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 63]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mMerchant Load (13.7ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" GROUP BY "merchants"."id"[0m
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 90]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 10]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 55]]
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 35]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 27]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 45]]
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 23]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 6]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 56]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 86]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Processing by Api::V1::MerchantsController#index as */*
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 91]]
+  Parameters: {"sorted"=>"age"}
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 84]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 58]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 39]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 8]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 92]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 87]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 93]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 74]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 89]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 54]]
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 69]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 36]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 29]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 31]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 71]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 50]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 68]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 60]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 34]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 97]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 51]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 14]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 96]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 66]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 80]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 22]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 70]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 59]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 52]]
+  [1m[36mMerchant Load (13.5ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" GROUP BY "merchants"."id" ORDER BY "merchants"."created_at" DESC[0m
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 13]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 83]]
+  [1m[36mItem Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 65]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 100]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 2]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 97]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 16]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 67]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 62]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 98]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 63]]
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 99]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 75]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 90]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 90]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 98]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 89]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 95]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 10]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 93]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 73]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 35]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 92]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 44]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 45]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 94]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 6]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 11]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 91]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 86]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 99]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 96]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 42]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 84]]
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 88]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 88]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 39]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 82]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 87]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 92]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 41]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 80]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 93]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 46]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 77]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 89]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 40]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 81]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 69]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 43]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 78]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 53]]
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 36]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 85]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 32]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 31]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 79]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 9]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 50]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 7]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 82]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 60]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 100]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 83]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 38]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 97]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 76]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 14]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 15]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 86]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 66]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 79]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (2.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 84]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 69]]
+  [1m[36mItem Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 48]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 22]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 26]]
+  [1m[36mItem Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 59]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 73]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 12]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 13]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 68]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 85]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 65]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 72]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 2]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 74]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 72]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 75]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 95]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 16]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 78]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 62]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 71]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 57]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 75]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 67]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 24]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 98]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 70]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 73]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 81]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 64]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 61]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 44]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 11]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 63]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 19]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 99]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 77]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 60]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 42]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 25]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 66]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 88]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 94]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 65]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 82]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 30]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 62]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 41]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 61]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 21]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 46]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 59]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 49]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 40]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 58]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 47]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 43]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 55]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 3]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 53]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 57]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 17]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 32]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 53]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 9]]
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 28]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 54]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 37]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 56]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 7]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 50]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 100]]
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 20]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 42]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 33]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 38]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 52]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 1]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 15]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 41]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 76]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 79]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 46]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 5]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 43]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 48]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 40]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 18]]
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 26]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 64]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Completed 200 OK in 132ms (Views: 85.8ms | ActiveRecord: 46.1ms | Allocations: 145742)
+
+
+  [1m[36mItem Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 12]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 85]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 51]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 72]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 47]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 95]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 48]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 78]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 49]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 57]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 45]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 24]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 44]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 81]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 61]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 38]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 19]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 34]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 77]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 36]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 25]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 33]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 94]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 37]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 30]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 39]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 21]]
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 35]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 49]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 30]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 47]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 22]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 3]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 32]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 17]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 26]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 28]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 29]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 37]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 24]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 20]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 25]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 33]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 23]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 1]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 27]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 76]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 28]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 5]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 31]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 18]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 13]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 64]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 16]]
+Completed 200 OK in 141ms (Views: 82.6ms | ActiveRecord: 58.0ms | Allocations: 168073)
+
+
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 12]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 10]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 20]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 15]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 19]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 21]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 11]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 18]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 14]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 17]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 2]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 5]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 1]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 6]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 3]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 8]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 7]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+  [1m[36mItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 9]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Completed 200 OK in 135ms (Views: 80.1ms | ActiveRecord: 54.5ms | Allocations: 159046)
+
+
+Started GET "/api/v1/merchants?status=returned" for ::1 at 2024-11-01 10:07:09 -0600
+Processing by Api::V1::MerchantsController#index as */*
+  Parameters: {"status"=>"returned"}
+  [1m[36mMerchant Load (106.3ms)[0m  [1m[34mSELECT DISTINCT merchants.*, COUNT(items.id) AS item_count FROM "merchants" INNER JOIN "invoices" ON "invoices"."merchant_id" = "merchants"."id" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" WHERE "invoices"."status" = $1 GROUP BY "merchants"."id"[0m  [["status", "returned"]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:5:in `index'
+  [1m[36mItem Count (35.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 42]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Completed 200 OK in 179ms (Views: 28.1ms | ActiveRecord: 148.5ms | Allocations: 3065)
+
+
+Started GET "/api/v1/merchants/42" for ::1 at 2024-11-01 10:07:17 -0600
+Processing by Api::V1::MerchantsController#show as */*
+  Parameters: {"id"=>"42"}
+  [1m[36mMerchant Load (1.1ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" WHERE "merchants"."id" = $1 GROUP BY "merchants"."id" LIMIT $2[0m  [["id", 42], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:9:in `show'
+  [1m[36mItem Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 42]]
+  ↳ app/models/merchant.rb:34:in `item_count'
+Completed 200 OK in 8ms (Views: 2.0ms | ActiveRecord: 1.4ms | Allocations: 1411)
+
+
+Started GET "/api/v1/merchants/8923987297" for ::1 at 2024-11-01 10:07:17 -0600
+Processing by Api::V1::MerchantsController#show as */*
+  Parameters: {"id"=>"8923987297"}
+  [1m[36mMerchant Load (0.5ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" WHERE "merchants"."id" = $1 GROUP BY "merchants"."id" LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:9:in `show'
+Completed 404 Not Found in 2ms (ActiveRecord: 0.5ms | Allocations: 783)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
+  
+app/controllers/api/v1/merchants_controller.rb:9:in `show'
+Started GET "/api/v1/merchants/99/items" for ::1 at 2024-11-01 10:07:34 -0600
+Processing by Api::V1::MerchantItemsController#index as */*
+  Parameters: {"id"=>"99"}
+  [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 99], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchant_items_controller.rb:3:in `index'
+  [1m[36mItem Load (0.9ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 99]]
+  ↳ app/controllers/api/v1/merchant_items_controller.rb:5:in `index'
+Completed 200 OK in 64ms (Views: 40.6ms | ActiveRecord: 1.5ms | Allocations: 8830)
+
+
+Started GET "/api/v1/merchants/8923987297/items" for ::1 at 2024-11-01 10:07:34 -0600
+Processing by Api::V1::MerchantItemsController#index as */*
+  Parameters: {"id"=>"8923987297"}
+  [1m[36mMerchant Load (0.2ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchant_items_controller.rb:3:in `index'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 508)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Merchant with 'id'=8923987297):
+  
+app/controllers/api/v1/merchant_items_controller.rb:3:in `index'
