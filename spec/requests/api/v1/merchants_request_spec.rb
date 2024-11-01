@@ -87,6 +87,37 @@ RSpec.describe "Mechant", type: :request do
         end
     end
 
+    describe "retruns all items for a merchant with #index" do
+      it "can return all the items for a specific merchant" do
+        item1 = Item.create(
+          name: "socks",
+          description: "keep feet warm",
+          unit_price: 99.99,
+          merchant_id: @merchant1.id
+        )
+
+        item2 = Item.create(
+          name: "shovel",
+          description: "bury bodies",
+          unit_price: 50.01,
+          merchant_id: @merchant1.id
+        )
+
+        get "/api/v1/merchants/#{@merchant1.id}/items"
+        expect(response).to be_successful
+
+      item_info = JSON.parse(response.body, symbolize_names: true)
+  
+      item_info[:data].each do |item|
+        expect(item[:type]).to eq('item')
+        expect(item[:attributes]).to have_key(:name)
+        expect(item[:attributes]).to have_key(:description)
+        expect(item[:attributes]).to have_key(:unit_price)
+        expect(item[:attributes]).to have_key(:merchant_id)
+        expect(item[:attributes][:merchant_id]).to eq(@merchant1.id)
+      end
+      end
+
     describe "can find customers for merchant ID" do
         it "returns customer name if given merchant ID" do
             customer = Customer.create( 
