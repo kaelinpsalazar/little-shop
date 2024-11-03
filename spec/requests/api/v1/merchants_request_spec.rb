@@ -125,7 +125,7 @@ RSpec.describe "Mechant", type: :request do
                 first_name: "Mary", 
                 last_name: "Shelley" 
                 )
-            Invoice.create!(merchant: @merchant1, customer: customer)
+            Invoice.create!(merchant: @merchant1, customer: customer, status: 'completed')
             get "/api/v1/merchants/#{@merchant1.id}/customers" 
             
             expect(response).to be_successful 
