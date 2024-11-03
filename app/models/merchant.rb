@@ -34,4 +34,9 @@ class Merchant < ApplicationRecord
   def item_count
     items.count
   end
+
+  def self.find_merchant_by_name(params)
+    merchant = Merchant.where("name ILIKE ?", "%#{params[:name]}%").first
+    merchant
+  end
 end

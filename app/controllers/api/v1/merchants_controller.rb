@@ -26,6 +26,15 @@ class Api::V1::MerchantsController < ApplicationController
         render json: Merchant.delete(params[:id])
     end
 
+    def find
+        if [:name].present?
+            merchant = Merchant.find_merchant_by_name(params)
+                render json: MerchantSerializer.new(merchant)
+        else
+          render json: { error: "Merchant not found" }, status: :not_found
+        end
+      end
+
     private
 
     def merchant_params

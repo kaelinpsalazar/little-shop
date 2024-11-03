@@ -10,4 +10,15 @@ class Item < ApplicationRecord
   def self.sorted_by_price
     order(unit_price: :asc)
   end
+
+  def self.find_items_by_price
+    items = Item.where("unit_price >= ?", params[:min_price]) if params[:min_price].present?
+    items = Item.where("unit_price <= ?", params[:max_price]) if params[:max_price].present?
+    items
+  end
+
+  def self.find_items_by_name
+    items = Item.where("name ILIKE ?", "%#{params[:name]}%")
+    items
+  end
 end

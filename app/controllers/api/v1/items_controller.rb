@@ -33,6 +33,19 @@ class Api::V1::ItemsController < ApplicationController
     item.destroy
   end
 
+  def find_all
+    price_parameters = [:min_price, :max_price]
+    if price_parameters.present?
+      items = Itmes.find_items_by_price(params)
+      render json: ItemSerializer.new(itmes)
+    elsif [:name].present?
+      items = Itmes.find_items_by_name(params)
+      render json: ItemSerializer.new(itmes)
+    else
+      render json: { error: "Itmes not found" }, status: :not_found
+    end
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
