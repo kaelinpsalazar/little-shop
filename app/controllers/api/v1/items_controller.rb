@@ -1,6 +1,7 @@
 class Api::V1::ItemsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
+  rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
 
   def index
     items = if params[:sorted] == 'price'
@@ -46,4 +47,7 @@ class Api::V1::ItemsController < ApplicationController
     render json: ErrorSerializer.format_error(exception, 422), status: :unprocessable_entity
   end
   
+  def parameter_missing_response(exception)
+    render json: ErrorSerializer.format_error(exception, 400), status: :bad_request
+  end 
 end
