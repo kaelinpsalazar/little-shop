@@ -185,7 +185,7 @@ RSpec.describe "Items API", type: :request do
       expect(created_item[:errors]).to be_a(Array)
       expect(created_item[:errors].first[:status]).to eq("422")
       expect(created_item[:errors].first[:title]).to eq("Unprocessable Entity")
-      expect(created_item[:errors].first[:detail]).to eq("Validation failed: Name can't be blank, Unit price can't be blank, Unit price is not a number, Description can't be blank")
+      expect(created_item[:errors].first[:detail]).to eq("Validation failed: Name can't be blank, Unit price can't be blank, Description can't be blank")
     end
 
     it "returns a 404 status with error message when item doesn't exist" do

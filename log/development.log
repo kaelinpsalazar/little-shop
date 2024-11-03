@@ -2650,3 +2650,28 @@ Processing by Api::V1::ItemsMerchantController#index as */*
 Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 512)
 
 
+Started DELETE "/api/v1/items/99999" for ::1 at 2024-11-03 14:46:41 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::ItemsController#destroy as */*
+  Parameters: {"id"=>"99999"}
+  [1m[36mItem Load (3.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 99999], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:33:in `destroy'
+Completed 404 Not Found in 34ms (Views: 0.1ms | ActiveRecord: 16.1ms | Allocations: 14255)
+
+
+Started GET "/api/v1/items/8923987297/merchant" for ::1 at 2024-11-03 14:46:41 -0700
+Processing by Api::V1::ItemsMerchantController#index as */*
+  Parameters: {"id"=>"8923987297"}
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_merchant_controller.rb:5:in `index'
+Completed 404 Not Found in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 585)
+
+
+Started GET "/api/v1/items/string-instead-of-integer/merchant" for ::1 at 2024-11-03 14:46:41 -0700
+Processing by Api::V1::ItemsMerchantController#index as */*
+  Parameters: {"id"=>"string-instead-of-integer"}
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_merchant_controller.rb:5:in `index'
+Completed 404 Not Found in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 511)
+
+
