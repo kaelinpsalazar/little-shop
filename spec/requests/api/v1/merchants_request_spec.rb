@@ -178,5 +178,44 @@ RSpec.describe "Mechant", type: :request do
           expect(get_merchant[:errors].first[:title]).to eq("Resource Not Found")
           expect(get_merchant[:errors].first[:detail]).to eq("Couldn't find Merchant with 'id'=219058")
         end
+
+        it "will return an error if given an empty object" do
+            merchant_params = {        
+            }
+      
+            headers = { "CONTENT_TYPE" => "application/json" }
+      
+            patch "/api/v1/merchants/4", headers: headers, params: JSON.generate(merchant: merchant_params)
+            expect(response).to_not be_successful
+            expect(response.status).to eq(400)
+      
+      
+            created_merchant = JSON.parse(response.body, symbolize_names: true)
+      
+            expect(created_merchant[:errors]).to be_a(Array)
+            expect(created_merchant[:errors].first[:status]).to eq("400")
+            expect(created_merchant[:errors].first[:title]).to eq("Bad Request")
+            expect(created_merchant[:errors].first[:detail]).to eq("param is missing or the value is empty: merchant")
+          end
+
+          it "handles errors for customers for given merchant if given invalid merchant" do
+            get "/api/v1/merchants/990099/customers"
+        
+            expect(response).to_not be_successful
+            expect(response.status).to eq(404)
+
+            get_merchant = JSON.parse(response.body, symbolize_names: true)
+    
+            expect(get_merchant[:errors]).to be_a(Array)
+            expect(get_merchant[:errors].first[:status]).to eq("404")
+            expect(get_merchant[:errors].first[:title]).to eq("Resource Not Found")
+            expect(get_merchant[:errors].first[:detail]).to eq("Couldn't find Merchant with 'id'=990099")
+          end
+
+          it 'returns "Error" for any other status' do
+            expect(ErrorSerializer.error_title(408)).to eq("Error")
+            expect(ErrorSerializer.error_title(403)).to eq("Error")
+            expect(ErrorSerializer.error_title(401)).to eq("Error")
+          end
       end
 end

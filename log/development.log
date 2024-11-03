@@ -2303,3 +2303,350 @@ Processing by Api::V1::MerchantsController#create as */*
 Completed 400 Bad Request in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 85)
 
 
+Started POST "/api/v1/merchants" for ::1 at 2024-11-03 14:08:10 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (4.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::MerchantsController#create as */*
+  Parameters: {"merchant"=>{}}
+Completed 400 Bad Request in 5ms (Views: 0.1ms | ActiveRecord: 25.8ms | Allocations: 2283)
+
+
+Started POST "/api/v1/merchants" for ::1 at 2024-11-03 14:08:11 -0700
+Processing by Api::V1::MerchantsController#create as */*
+Completed 400 Bad Request in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 88)
+
+
+Started POST "/api/v1/merchants" for ::1 at 2024-11-03 14:08:23 -0700
+Error occurred while parsing request parameters.
+Contents:
+
+
+
+Processing by Api::V1::MerchantsController#create as */*
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 129)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+app/controllers/api/v1/merchants_controller.rb:32:in `merchant_params'
+app/controllers/api/v1/merchants_controller.rb:17:in `create'
+Started POST "/api/v1/merchants" for ::1 at 2024-11-03 14:08:24 -0700
+Processing by Api::V1::MerchantsController#create as */*
+Completed 400 Bad Request in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 87)
+
+
+Started POST "/api/v1/merchants" for ::1 at 2024-11-03 14:08:29 -0700
+Processing by Api::V1::MerchantsController#create as */*
+  Parameters: {"merchant"=>{}}
+Completed 400 Bad Request in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 92)
+
+
+Started POST "/api/v1/merchants" for ::1 at 2024-11-03 14:08:29 -0700
+Processing by Api::V1::MerchantsController#create as */*
+Completed 400 Bad Request in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 86)
+
+
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:10:02 -0700
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (2.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:15:in `show'
+Completed 200 OK in 43ms (Views: 0.2ms | ActiveRecord: 25.6ms | Allocations: 9405)
+
+
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:02 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:02 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:10:02 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:02 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:10:03 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:10:10 -0700
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (24.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:15:in `show'
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 24.3ms | Allocations: 527)
+
+
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:10 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Error occurred while parsing request parameters.
+Contents:
+
+
+
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:10 -0700
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:10:10 -0700
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:10:10 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:10 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:10:15 -0700
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (0.6ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:15:in `show'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 533)
+
+
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:15 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:15 -0700
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:10:15 -0700
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:15 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:10:15 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:10:35 -0700
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (54.5ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:15:in `show'
+Completed 200 OK in 57ms (Views: 0.3ms | ActiveRecord: 54.5ms | Allocations: 557)
+
+
+Started PATCH "/api/v1/items/179" for ::1 at 2024-11-03 14:10:35 -0700
+Processing by Api::V1::ItemsController#update as */*
+  Parameters: {"id"=>"179", "item"=>{}}
+  [1m[36mItem Load (11.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:25:in `update'
+Completed 400 Bad Request in 15ms (ActiveRecord: 11.4ms | Allocations: 536)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: item):
+  
+app/controllers/api/v1/items_controller.rb:38:in `item_params'
+app/controllers/api/v1/items_controller.rb:26:in `update'
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:35 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:10:35 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:35 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:10:35 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started GET "/api/v1/items" for ::1 at 2024-11-03 14:10:46 -0700
+Processing by Api::V1::ItemsController#index as */*
+  [1m[36mItem Load (60.5ms)[0m  [1m[34mSELECT "items".* FROM "items"[0m
+  ↳ app/controllers/api/v1/items_controller.rb:11:in `index'
+Completed 200 OK in 129ms (Views: 67.6ms | ActiveRecord: 60.5ms | Allocations: 114098)
+
+
+Started GET "/api/v1/items?sorted=price" for ::1 at 2024-11-03 14:10:46 -0700
+Processing by Api::V1::ItemsController#index as */*
+  Parameters: {"sorted"=>"price"}
+  [1m[36mItem Load (5.7ms)[0m  [1m[34mSELECT "items".* FROM "items" ORDER BY "items"."unit_price" ASC[0m
+  ↳ app/controllers/api/v1/items_controller.rb:11:in `index'
+Completed 200 OK in 61ms (Views: 53.9ms | ActiveRecord: 5.7ms | Allocations: 114142)
+
+
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:10:55 -0700
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (3.6ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:15:in `show'
+Completed 200 OK in 34ms (Views: 0.5ms | ActiveRecord: 3.4ms | Allocations: 522)
+
+
+Started PATCH "/api/v1/items4" for ::1 at 2024-11-03 14:10:55 -0700
+  
+ActionController::RoutingError (No route matches [PATCH] "/api/v1/items4"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:55 -0700
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:10:55 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:10:55 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:10:56 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:11:33 -0700
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:15:in `show'
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 521)
+
+
+Started PATCH "/api/v1/items/4" for ::1 at 2024-11-03 14:11:34 -0700
+Processing by Api::V1::ItemsController#update as */*
+  Parameters: {"id"=>"4", "item"=>{}}
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:25:in `update'
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.4ms | Allocations: 521)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: item):
+  
+app/controllers/api/v1/items_controller.rb:38:in `item_params'
+app/controllers/api/v1/items_controller.rb:26:in `update'
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:11:34 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:11:34 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:11:34 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:11:34 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started GET "/api/v1/merchants/4" for ::1 at 2024-11-03 14:12:42 -0700
+Processing by Api::V1::MerchantsController#show as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mMerchant Load (5.4ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" WHERE "merchants"."id" = $1 GROUP BY "merchants"."id" LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_controller.rb:12:in `show'
+  [1m[36mItem Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "items" WHERE "items"."merchant_id" = $1[0m  [["merchant_id", 4]]
+  ↳ app/models/merchant.rb:35:in `item_count'
+Completed 200 OK in 58ms (Views: 6.8ms | ActiveRecord: 10.3ms | Allocations: 7602)
+
+
+Started PATCH "/api/v1/merchants/4" for ::1 at 2024-11-03 14:12:43 -0700
+Processing by Api::V1::MerchantsController#update as */*
+  Parameters: {"id"=>"4", "merchant"=>{}}
+Completed 400 Bad Request in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 91)
+
+
+Started PUT "/api/v1/merchants/99999999" for ::1 at 2024-11-03 14:12:43 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/merchants/99999999"):
+  
+Started PUT "/api/v1/merchants/string-instead-of-integer" for ::1 at 2024-11-03 14:12:43 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/merchants/string-instead-of-integer"):
+  
+Started GET "/api/v1/items/179" for ::1 at 2024-11-03 14:16:25 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::ItemsController#show as */*
+  Parameters: {"id"=>"179"}
+  [1m[36mItem Load (0.8ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 179], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:16:in `show'
+Completed 200 OK in 45ms (Views: 0.2ms | ActiveRecord: 10.2ms | Allocations: 19389)
+
+
+Started PATCH "/api/v1/items/4" for ::1 at 2024-11-03 14:16:25 -0700
+Processing by Api::V1::ItemsController#update as */*
+  Parameters: {"id"=>"4", "item"=>{}}
+  [1m[36mItem Load (11.6ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_controller.rb:26:in `update'
+Completed 400 Bad Request in 13ms (Views: 0.1ms | ActiveRecord: 11.5ms | Allocations: 613)
+
+
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:16:25 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/12435678912354" for ::1 at 2024-11-03 14:16:25 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/12435678912354"):
+  
+Started PUT "/api/v1/items/179" for ::1 at 2024-11-03 14:16:25 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/179"):
+  
+Started PUT "/api/v1/items/string-instead-of-integer" for ::1 at 2024-11-03 14:16:25 -0700
+  
+ActionController::RoutingError (No route matches [PUT] "/api/v1/items/string-instead-of-integer"):
+  
+Started GET "/api/v1/merchants/9999999/customers" for ::1 at 2024-11-03 14:19:24 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::MerchantsCustomersController#index as */*
+  Parameters: {"merchant_id"=>"9999999"}
+  [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 9999999], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:5:in `index'
+Completed 404 Not Found in 30ms (Views: 0.1ms | ActiveRecord: 12.6ms | Allocations: 14128)
+
+
+Started GET "/api/v1/merchants/8923987297/customers" for ::1 at 2024-11-03 14:19:24 -0700
+Processing by Api::V1::MerchantsCustomersController#index as */*
+  Parameters: {"merchant_id"=>"8923987297"}
+  [1m[36mMerchant Load (0.3ms)[0m  [1m[34mSELECT "merchants".* FROM "merchants" WHERE "merchants"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/merchants_customers_controller.rb:5:in `index'
+Completed 404 Not Found in 1ms (Views: 0.0ms | ActiveRecord: 0.3ms | Allocations: 493)
+
+
+Started GET "/api/v1/items/99999/merchant" for ::1 at 2024-11-03 14:25:12 -0700
+Processing by Api::V1::ItemsMerchantController#index as */*
+  Parameters: {"id"=>"99999"}
+  [1m[36mItem Load (1.0ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 99999], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_merchant_controller.rb:5:in `index'
+Completed 404 Not Found in 39ms (Views: 0.3ms | ActiveRecord: 31.6ms | Allocations: 2555)
+
+
+Started GET "/api/v1/items/8923987297/merchant" for ::1 at 2024-11-03 14:25:12 -0700
+Started GET "/api/v1/items/string-instead-of-integer/merchant" for ::1 at 2024-11-03 14:25:12 -0700
+Processing by Api::V1::ItemsMerchantController#index as */*
+  Parameters: {"id"=>"8923987297"}
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", 8923987297], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_merchant_controller.rb:5:in `index'
+Completed 404 Not Found in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 750)
+
+
+Processing by Api::V1::ItemsMerchantController#index as */*
+  Parameters: {"id"=>"string-instead-of-integer"}
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/items_merchant_controller.rb:5:in `index'
+Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 512)
+
+
