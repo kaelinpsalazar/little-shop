@@ -184,10 +184,22 @@ RSpec.describe "Items API", type: :request do
 
       expect(created_item[:errors]).to be_a(Array)
       expect(created_item[:errors].first[:status]).to eq("422")
-      expect(created_item[:errors].first[:message]).to eq("Error: All attributes must be included")
+      expect(created_item[:errors].first[:title]).to eq("Unprocessable Entity")
+      expect(created_item[:errors].first[:detail]).to eq("Validation failed: Name can't be blank, Unit price can't be blank, Unit price is not a number, Description can't be blank")
+    end
 
+    it "returns a 404 status with error message when item doesn't exist" do
+      get "/api/v1/items/219058"
 
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+
+      get_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(get_item[:errors]).to be_a(Array)
+      expect(get_item[:errors].first[:status]).to eq("404")
+      expect(get_item[:errors].first[:title]).to eq("Resource Not Found")
+      expect(get_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=219058")
     end
   end
-  
 end
