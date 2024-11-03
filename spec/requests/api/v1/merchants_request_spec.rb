@@ -141,4 +141,42 @@ RSpec.describe "Mechant", type: :request do
             expect(customer1[:attributes]).to have_key(:last_name)
         end
     end
+
+    describe "sad paths" do
+        it "will return an error if all params are not valid" do
+          merchant_params = {
+            merchant: {
+              name: nil
+            }
+          }
+    
+          headers = {"CONTENT_TYPE" => "application/json"} 
+          post "/api/v1/merchants", headers: headers, params: JSON.generate(merchant_params)
+    
+          expect(response).to_not be_successful
+          expect(response.status).to eq(422)
+    
+    
+          created_merchant = JSON.parse(response.body, symbolize_names: true)
+    
+          expect(created_merchant[:errors]).to be_a(Array)
+          expect(created_merchant[:errors].first[:status]).to eq("422")
+          expect(created_merchant[:errors].first[:title]).to eq("Unprocessable Entity")
+          expect(created_merchant[:errors].first[:detail]).to eq("Validation failed: Name can't be blank")
+        end
+    
+        it "returns a 404 status with error message when item doesn't exist" do
+          get "/api/v1/merchants/219058"
+    
+          expect(response).to_not be_successful
+          expect(response.status).to eq(404)
+    
+          get_merchant = JSON.parse(response.body, symbolize_names: true)
+    
+          expect(get_merchant[:errors]).to be_a(Array)
+          expect(get_merchant[:errors].first[:status]).to eq("404")
+          expect(get_merchant[:errors].first[:title]).to eq("Resource Not Found")
+          expect(get_merchant[:errors].first[:detail]).to eq("Couldn't find Merchant with 'id'=219058")
+        end
+      end
 end
