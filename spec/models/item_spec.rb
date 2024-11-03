@@ -21,4 +21,16 @@ RSpec.describe Item, type: :model do
       expect(Item.sorted_by_price).to eq([item2, item3, item1])
     end
   end
+
+  describe ' find all itmes using #find_items_by_price' do
+    it 'returns all itmes that match a price parameter' do
+
+    end
+  end
+
+  describe ' find all itmes using #find_items_by_name' do
+    it 'returns all itmes that match a price parameter' do
+
+    end
+  end
 end
