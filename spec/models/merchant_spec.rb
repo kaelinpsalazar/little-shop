@@ -36,7 +36,7 @@ RSpec.describe Merchant, type: :model do
 
   describe ".sorted_by_created_at" do 
     it 'returns merchants sorted by created at in dec. order' do
-      expect(Merchant.sorted_by_created_at).to eq([@merchant3, @merchant2, @merchant1]) # Corrected
+      expect(Merchant.sorted_by_created_at).to eq([@merchant3, @merchant2, @merchant1])
     end
   end
 
