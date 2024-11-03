@@ -5,6 +5,4 @@ class Api::V1::ItemsMerchantController < ApplicationController
     merchant = item.merchant
     render json: MerchantSerializer.new(merchant)
   end
-
 end
-

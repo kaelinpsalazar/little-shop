@@ -12,7 +12,7 @@ RSpec.describe "Items API", type: :request do
   describe "Get all with #index" do
     it "can get all items" do
       get '/api/v1/items'
-
+      
       expect(response).to be_successful
       expect(response).to have_http_status(:ok)
 
@@ -145,7 +145,7 @@ RSpec.describe "Items API", type: :request do
 
   end
 
-  it "can find the merchant information tied to a specific ID" do
+  it "can find the merchant information tied to a specific merchant ID" do
     item = Item.create(
         name: "socks",
         description: "keep feet warm",

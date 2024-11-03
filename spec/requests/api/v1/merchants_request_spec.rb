@@ -44,7 +44,7 @@ RSpec.describe "Mechant", type: :request do
         end
     end
 
-  describe "make a new merchant with #create" do
+    describe "make a new merchant with #create" do
         it "creates a new merchant" do
             merchant_attributes = {name: "Gnome Depot"}
 
@@ -56,7 +56,7 @@ RSpec.describe "Mechant", type: :request do
         end
     end
 
-  describe "edits a merchant with #update" do
+    describe "edits a merchant with #update" do
         it "can update an existing merchant" do
             id = Merchant.create(name: "Gnome Depot").id
 
@@ -74,8 +74,8 @@ RSpec.describe "Mechant", type: :request do
         end
     end
 
-  describe "deletes a merchant with #delete" do
-       it "can delete an existing merchant" do
+    describe "deletes a merchant with #delete" do
+        it "can delete an existing merchant" do
 
             expect(Merchant.count).to eq(3)
 
@@ -96,17 +96,17 @@ RSpec.describe "Mechant", type: :request do
           merchant_id: @merchant1.id
         )
 
-        item2 = Item.create(
-          name: "shovel",
-          description: "bury bodies",
-          unit_price: 50.01,
-          merchant_id: @merchant1.id
-        )
+            item2 = Item.create(
+            name: "shovel",
+            description: "bury bodies",
+            unit_price: 50.01,
+            merchant_id: @merchant1.id
+            )
 
-        get "/api/v1/merchants/#{@merchant1.id}/items"
-        expect(response).to be_successful
+            get "/api/v1/merchants/#{@merchant1.id}/items"
+            expect(response).to be_successful
 
-      item_info = JSON.parse(response.body, symbolize_names: true)
+            item_info = JSON.parse(response.body, symbolize_names: true)
   
         item_info[:data].each do |item|
           expect(item[:type]).to eq('item')

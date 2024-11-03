@@ -17,11 +17,11 @@ class Api::V1::MerchantsController < ApplicationController
 
     def update
         render json: Merchant.update(params[:id], merchant_params)
-      end
+    end
     
-      def destroy
+    def destroy
         render json: Merchant.delete(params[:id])
-      end
+    end
 
     private
 
