@@ -33,14 +33,7 @@ RSpec.describe Item, type: :model do
       itmes = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(items.count).to eq(2)
     
-      expect(items).to include(
-        include(
-          attributes: include(name: "??", unit_price: ??)
-        ),
-        include(
-          attributes: include(name: "??", unit_price: ??)
-        )
-      )  
+      expect(items).to eq([@item1, @item3])
     end
   end
 
@@ -55,10 +48,10 @@ RSpec.describe Item, type: :model do
     
       expect(items).to include(
         include(
-          attributes: include(name: "??", unit_price: ??)
+          attributes: include(name: "hydroflask", unit_price: 20.00)
         ),
         include(
-          attributes: include(name: "??", unit_price: ??)
+          attributes: include(name: "airpump", unit_price: 55.00)
         )
       )  
     end
@@ -66,15 +59,18 @@ RSpec.describe Item, type: :model do
 
   describe ' find all itmes using #find_items_by_name' do
     xit 'returns all itmes that match a name' do
-      get '/api/v1/items/find_all', params: { name: '??' }
+      get '/api/v1/items/find_all', params: { name: 'air' }
 
       expect(response).to be_successful
   
       items = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(items.count).to eq(1) 
+      expect(items.count).to eq(2) 
       expect(items).to include(
         include(
-          attributes: include(name: "??", price: ??)
+          attributes: include(name: "airbuds", price: 75.00)
+        ),
+        include(
+          attributes: include(name: "airpump", price: 55.00)
         )
       )
     end

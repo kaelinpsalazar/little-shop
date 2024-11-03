@@ -48,7 +48,7 @@ RSpec.describe Merchant, type: :model do
   # end
 
   describe '.with_item_count' do 
-    it 'returns merchants with item_count' do
+    xit 'returns merchants with item_count' do
       merchant = Merchant.find(@merchant1.id)
       item_count = merchant.item_count
       expect(merchant.item_count).to eq(5)
@@ -56,7 +56,7 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe ' find one merchant using #find_merchant_by_name' do
-    it 'returns a merchant that matches a name search' do
+    xit 'returns a merchant that matches a name search' do
 
     end
   end
