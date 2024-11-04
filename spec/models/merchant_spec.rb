@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Merchant, type: :model do
   before(:each) do
     # Create 3 merchants
-    @merchant1 = create(:merchant, created_at: 2.days.ago)
-    @merchant2 = create(:merchant, created_at: 1.day.ago)
-    @merchant3 = create(:merchant, created_at: Time.now)
+    @merchant1 = create(:merchant, name: "Gnome Depot", created_at: 2.days.ago)
+    @merchant2 = create(:merchant, name: "Bloodbath and Beyond", created_at: 1.day.ago)
+    @merchant3 = create(:merchant, name: "The Philosopher's Scone", created_at: Time.now)
 
     # Create 5 items for the first merchant
     @items = create_list(:item, 5, merchant: @merchant1)
@@ -53,8 +53,16 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe ' find one merchant using #find_merchant_by_name' do
-    xit 'returns a merchant that matches a name search' do
+    it 'returns a merchant that matches a name search' do
+      params1 = {name: 'gnome'}
+      params2 = {name: 'th'}
+      params3 = {name: 'ScoNe'}
+      params4 = {name: 'xyz'}
 
+      expect(Merchant.find_merchant_by_name(params1)).to eq(@merchant1)
+      expect(Merchant.find_merchant_by_name(params2)).to eq(@merchant2)
+      expect(Merchant.find_merchant_by_name(params3)).to eq(@merchant3)
+      expect(Merchant.find_merchant_by_name(params4)).to eq(nil)
     end
   end
 end
