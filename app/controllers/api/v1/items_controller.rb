@@ -34,17 +34,23 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find_all
-    price_parameters = [:min_price, :max_price]
-    if price_parameters.present?
-      items = Itmes.find_items_by_price(params)
-      render json: ItemSerializer.new(itmes)
-    elsif [:name].present?
-      items = Itmes.find_items_by_name(params)
-      render json: ItemSerializer.new(itmes)
+    if params[:min_price].present? || params[:max_price].present?
+      items = Item.find_items_by_price(params.slice(:min_price, :max_price))    
+    elsif params[:name].present?
+      items = Item.find_items_by_name(params[:name])
     else
-      render json: { error: "Itmes not found" }, status: :not_found
+      render json: { error: "No search parameters provided" }, status: :bad_request
+      return
+    end
+  
+    if items.empty?
+      render json: { error: "No items found" }, status: :not_found
+    else
+      render json: ItemSerializer.new(items)
     end
   end
+  
+  
 
   private
   def item_params
