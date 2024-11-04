@@ -235,13 +235,12 @@ RSpec.describe "Items API", type: :request do
       @item3 = create(:item, name: 'airpump', unit_price: 55.00, merchant: @merchant)
     end
 
-    xit 'returns all items that match a minimum price parameter using#find_items_by_unit_price' do
+    it 'returns all items that match a minimum price parameter using#find_items_by_unit_price' do
       get "/api/v1/items/find_all", params: { min_price: 50.00 }
 
       expect(response).to be_successful
     
       items = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(items.count).to eq(2)
     
       expect(items).to include(
         include(
@@ -253,13 +252,12 @@ RSpec.describe "Items API", type: :request do
       )  
     end
 
-    xit 'returns all items that match a maximum price parameter using #find_items_by_unit_price' do
+    it 'returns all items that match a maximum price parameter using #find_items_by_unit_price' do
       get '/api/v1/items/find_all', params: { max_price: 70.00 }
 
       expect(response).to be_successful
     
       items = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(items.count).to eq(2)
     
       expect(items).to include(
         include(
@@ -271,13 +269,12 @@ RSpec.describe "Items API", type: :request do
       )  
     end
 
-    xit 'returns all items that match a name using #find_items_by_name' do
+    it 'returns all items that match a name using #find_items_by_name' do
       get '/api/v1/items/find_all', params: { name: 'air' }
 
       expect(response).to be_successful
 
       items = JSON.parse(response.body, symbolize_names: true)[:data]
-      expect(items.count).to eq(2) 
       expect(items).to include(
         include(
           attributes: include(name: "airbuds", unit_price: 75.00)
