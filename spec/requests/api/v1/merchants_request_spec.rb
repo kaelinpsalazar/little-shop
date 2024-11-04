@@ -46,13 +46,13 @@ RSpec.describe "Mechant", type: :request do
 
     describe "make a new merchant with #create" do
         it "creates a new merchant" do
-            merchant_attributes = {name: "Gnome Depot"}
+            merchant_attributes = {name: "Boo Value"}
 
             post "/api/v1/merchants#create", params: {merchant: merchant_attributes}
 
             merchant = JSON.parse(response.body, symbolize_names: true)[:data]
-
-            expect(merchant[:attributes][:name]).to eq(merchant_attributes[:name])
+            
+            expect(merchant[:attributes][:name]).to eq("Boo Value")
         end
     end
 
