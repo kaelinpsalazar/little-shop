@@ -12,7 +12,7 @@ RSpec.describe "Items API", type: :request do
   describe "Get all with #index" do
     it "can get all items" do
       get '/api/v1/items'
-
+      
       expect(response).to be_successful
       expect(response).to have_http_status(:ok)
 
@@ -145,7 +145,7 @@ RSpec.describe "Items API", type: :request do
 
   end
 
-  it "can find the merchant information tied to a specific ID" do
+  it "can find the merchant information tied to a specific merchant ID" do
     item = Item.create(
         name: "socks",
         description: "keep feet warm",
@@ -184,10 +184,47 @@ RSpec.describe "Items API", type: :request do
 
       expect(created_item[:errors]).to be_a(Array)
       expect(created_item[:errors].first[:status]).to eq("422")
-      expect(created_item[:errors].first[:message]).to eq("Error: All attributes must be included")
+      expect(created_item[:errors].first[:title]).to eq("Unprocessable Entity")
+      expect(created_item[:errors].first[:detail]).to eq("Validation failed: Name can't be blank, Unit price can't be blank, Description can't be blank")
+    end
+
+    it "returns a 404 status with error message when item doesn't exist" do
+      get "/api/v1/items/219058"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+
+      get_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(get_item[:errors]).to be_a(Array)
+      expect(get_item[:errors].first[:status]).to eq("404")
+      expect(get_item[:errors].first[:title]).to eq("Resource Not Found")
+      expect(get_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=219058")
+    end
+
+    it "will return an error if given an empty object" do
+      item_params = {        
+      }
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch "/api/v1/items/4", headers: headers, params: JSON.generate(item: item_params)
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
 
 
+      created_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(created_item[:errors]).to be_a(Array)
+      expect(created_item[:errors].first[:status]).to eq("404")
+      expect(created_item[:errors].first[:title]).to eq("Resource Not Found")
+      expect(created_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=4")
+    end
+
+    it 'returns "Error" for any other status' do
+      expect(ErrorSerializer.error_title(408)).to eq("Error")
+      expect(ErrorSerializer.error_title(403)).to eq("Error")
+      expect(ErrorSerializer.error_title(401)).to eq("Error")
     end
   end
-  
 end

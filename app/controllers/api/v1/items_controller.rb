@@ -1,5 +1,8 @@
 class Api::V1::ItemsController < ApplicationController
-  
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
+  rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
+
   def index
     items = if params[:sorted] == 'price'
       Item.sorted_by_price
@@ -15,19 +18,8 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    begin
       item = Item.create!(item_params)
       render json: ItemSerializer.new(item), status: :created
-    rescue ActiveRecord::RecordInvalid => exception
-      render json: {
-        errors: [
-          {
-            status: "422",
-            message: "Error: All attributes must be included"
-          }
-        ]
-      }, status: :unprocessable_entity
-    end
   end
 
   def update
@@ -46,4 +38,16 @@ class Api::V1::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
   end
+
+  def not_found_response(exception)
+    render json: ErrorSerializer.format_error(exception, 404), status: :not_found
+  end
+
+  def unprocessable_entity_response(exception)
+    render json: ErrorSerializer.format_error(exception, 422), status: :unprocessable_entity
+  end
+  
+  def parameter_missing_response(exception)
+    render json: ErrorSerializer.format_error(exception, 400), status: :bad_request
+  end 
 end
