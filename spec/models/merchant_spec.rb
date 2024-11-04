@@ -58,4 +58,10 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.item_count).to eq(5)
     end
   end
+
+  describe ' find one merchant using #find_merchant_by_name' do
+    xit 'returns a merchant that matches a name search' do
+
+    end
+  end
 end

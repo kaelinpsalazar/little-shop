@@ -227,4 +227,62 @@ RSpec.describe "Items API", type: :request do
       expect(ErrorSerializer.error_title(401)).to eq("Error")
     end
   end
+
+  describe 'find all items based on filtering' do
+    before(:each) do
+      @item1 = create(:item, name: 'airbuds', unit_price: 75.00, merchant: @merchant)
+      @item2 = create(:item, name: 'hydroflask', unit_price: 20.00, merchant: @merchant)
+      @item3 = create(:item, name: 'airpump', unit_price: 55.00, merchant: @merchant)
+    end
+
+    it 'returns all items that match a minimum price parameter using#find_items_by_unit_price' do
+      get "/api/v1/items/find_all", params: { min_price: 50.00 }
+
+      expect(response).to be_successful
+    
+      items = JSON.parse(response.body, symbolize_names: true)[:data]
+    
+      expect(items).to include(
+        include(
+          attributes: include(name: "airbuds", unit_price: 75.00)
+        ),
+        include(
+          attributes: include(name: "airpump", unit_price: 55.00)
+        )
+      )  
+    end
+
+    it 'returns all items that match a maximum price parameter using #find_items_by_unit_price' do
+      get '/api/v1/items/find_all', params: { max_price: 70.00 }
+
+      expect(response).to be_successful
+    
+      items = JSON.parse(response.body, symbolize_names: true)[:data]
+    
+      expect(items).to include(
+        include(
+          attributes: include(name: "hydroflask", unit_price: 20.00)
+        ),
+        include(
+          attributes: include(name: "airpump", unit_price: 55.00)
+        )
+      )  
+    end
+
+    it 'returns all items that match a name using #find_items_by_name' do
+      get '/api/v1/items/find_all', params: { name: 'air' }
+
+      expect(response).to be_successful
+
+      items = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(items).to include(
+        include(
+          attributes: include(name: "airbuds", unit_price: 75.00)
+        ),
+        include(
+          attributes: include(name: "airpump", unit_price: 55.00)
+        )
+      )
+    end
+  end
 end
