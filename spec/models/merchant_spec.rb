@@ -52,7 +52,7 @@ RSpec.describe Merchant, type: :model do
   # end
 
   describe '.with_item_count' do 
-    xit 'returns merchants with item_count' do
+    it 'returns merchants with item_count' do
       merchant = Merchant.find(@merchant1.id)
       item_count = merchant.item_count
       expect(merchant.item_count).to eq(5)

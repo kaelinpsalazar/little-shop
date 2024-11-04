@@ -218,4 +218,15 @@ RSpec.describe "Mechant", type: :request do
             expect(ErrorSerializer.error_title(401)).to eq("Error")
           end
       end
+
+  describe 'find one merchant based on filtering' do
+    it 'returns one merchant that matchs a name using #find_merchant_by_name(params)' do
+    get '/api/v1/merchants/find', params: { name: 'blood' }
+
+    expect(response).to be_successful
+
+    merchant = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(merchant[:attributes][:name]).to eq("Bloodbath and Beyond")
+    end
+  end
 end
