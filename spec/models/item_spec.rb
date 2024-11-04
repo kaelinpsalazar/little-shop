@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
+  describe "validations" do
+    it { should validate_presence_of(:name)}
+    it { should validate_presence_of(:merchant_id) }
+    it { should validate_presence_of(:unit_price) }
+    it { should validate_presence_of(:description)}
+  end
+
   before(:each) do
     @merchant = create(:merchant)
     @item1 = create(:item, name: 'airbuds', unit_price: 75.00, merchant: @merchant)
