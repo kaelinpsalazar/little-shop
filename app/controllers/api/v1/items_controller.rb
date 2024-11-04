@@ -34,6 +34,25 @@ class Api::V1::ItemsController < ApplicationController
     item.destroy
   end
 
+  def find_all
+    if params[:min_price].present? || params[:max_price].present?
+      items = Item.find_items_by_price(params.slice(:min_price, :max_price))    
+    elsif params[:name].present?
+      items = Item.find_items_by_name(params[:name])
+    else
+      render json: { error: "No search parameters provided" }, status: :bad_request
+      return
+    end
+  
+    if items.empty?
+      render json: { error: "No items found" }, status: :not_found
+    else
+      render json: ItemSerializer.new(items)
+    end
+  end
+  
+  
+
   private
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
