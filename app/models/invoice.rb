@@ -5,10 +5,22 @@ class Invoice < ApplicationRecord
   has_many :transactions
 
   def self.for_merchant_with_status(merchant_id, status)
-    vaild_statuses = %w[shiped returned packaged]
-    return none unless valid_statuses.include?(status)
-
-    where(merchant_id: merchant_id, status: status)
+    valid_statuses = ["shipped", "returned", "packaged"]
+    
+    if valid_statuses.include?(status)
+      where(merchant_id: merchant_id, status: status)
+    else
+      []  
+    end
   end
 
+  def self.by_status(status)
+    return [] unless valid_status?(status)
+
+    where(status: status)
+  end
+
+  def self.valid_status?(status)
+    ["shipped", "returned", "packaged"].include?(status)
+  end
 end

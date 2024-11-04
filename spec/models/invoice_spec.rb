@@ -19,32 +19,42 @@ RSpec.describe Invoice, type: :model do
     it { should belong_to(:customer) }
     it { should belong_to(:merchant) }
   end
+  describe 'valid_status?' do
+      it 'returns true for "shipped"' do
+        expect(Invoice.valid_status?('shipped')).to be_truthy
+      end
+      
+      it 'returns true for "returned"' do
+        expect(Invoice.valid_status?('returned')).to be_truthy
+      end
+      
+      it 'returns true for "packaged"' do
+        expect(Invoice.valid_status?('packaged')).to be_truthy
+      end
+    
+    
 
-  describe 'scopes' do
-    describe '.by_status' do
-      context 'when filtering by "shipped"' do
-        it 'returns only shipped invoices' do
-          expect(Invoice.by_status('shipped')).to contain_exactly(@invoice1)
-        end
+    
+      it 'returns false for "invalid_status"' do
+        expect(Invoice.valid_status?('invalid_status')).to be_falsey
+      end
+  end
+
+  describe 'for_merchant_with_status' do
+      it 'returns only shipped invoices' do
+        expect(Invoice.for_merchant_with_status(@merchant.id, 'shipped')).to contain_exactly(@invoice1)
       end
 
-      context 'when filtering by "packaged"' do
-        it 'returns only packaged invoices' do
-          expect(Invoice.by_status('packaged')).to contain_exactly(@invoice2)
-        end
+      it 'returns only packaged invoices' do
+        expect(Invoice.for_merchant_with_status(@merchant.id, 'packaged')).to contain_exactly(@invoice2)
       end
 
-      context 'when filtering by "returned"' do
-        it 'returns only returned invoices' do
-          expect(Invoice.by_status('returned')).to contain_exactly(@invoice3)
-        end
+      it 'returns only returned invoices' do
+        expect(Invoice.for_merchant_with_status(@merchant.id, 'returned')).to contain_exactly(@invoice3)
       end
-
-      context 'when an invalid status is given' do
-        it 'returns an empty collection' do
-          expect(Invoice.by_status('invalid_status')).to be_empty
-        end
+    
+      it 'returns nil for an invalid status' do
+        expect(Invoice.for_merchant_with_status(@merchant.id, 'invalid_status')).to eq([])
       end
-    end
   end
 end
