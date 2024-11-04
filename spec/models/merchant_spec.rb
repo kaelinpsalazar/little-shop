@@ -44,13 +44,6 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
-  # describe ".with_returned_status" do
-  #   it 'returns mercahnts with at least one returned invoice' do
-  #     expect(Merchant.with_returned_status).to include(@merchant1)
-  #     expect(Merchant.with_returned_status).not_to include(@merchant2, @merchant3)
-  #   end
-  # end
-
   describe '.with_item_count' do 
     it 'returns merchants with item_count' do
       merchant = Merchant.find(@merchant1.id)
