@@ -6,32 +6,34 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   # Defines the root path route ("/")
   # root "posts#index"
-  
-  get "/api/v1/merchants/find", to: "api/v1/merchants#find"
-  get "/api/v1/items/find_all", to: "api/v1/items#find_all"
 
-  get "/api/v1/merchants/:id", to: 'api/v1/merchants#show'
-  post "/api/v1/merchants", to: "api/v1/merchants#create"
-  patch "/api/v1/merchants/:id", to: "api/v1/merchants#update"
-  delete "api/v1/merchants/:id", to: "api/v1/merchants#destroy"
-
-  get "/api/v1/merchants", to: 'api/v1/merchants#index'
-  get "/api/v1/merchants/:id", to: 'api/v1/merchants#show'
-  post "/api/v1/merchants", to: "api/v1/merchants#create"
-  patch "/api/v1/merchants/:id", to: "api/v1/merchants#update"
-  delete "api/v1/merchants/:id", to: "api/v1/merchants#destroy"
-  
-  get "/api/v1/items/:id/merchant", to: 'api/v1/items_merchant#index'
-  get "/api/v1/merchants/:merchant_id/customers", to: 'api/v1/merchants_customers#index'
-  get "/api/v1/merchants/:merchant_id/invoices", to: 'api/v1/merchants_invoices#index'
-  
-  get '/api/v1/items', to: 'api/v1/items#index'
-  get '/api/v1/items/:id', to: 'api/v1/items#show'
-  get '/api/v1/merchants/:id/items', to: 'api/v1/merchant_items#index'
-  post "/api/v1/items", to: "api/v1/items#create"
-  patch "/api/v1/items/:id", to: "api/v1/items#update"
-  delete "api/v1/items/:id", to: "api/v1/items#destroy"
-
+  namespace :api do
+    namespace :v1 do
+      get "/merchants/find", to: "merchants#find"
+      get "/items/find_all", to: "items#find_all"
+      get "/merchants/:id", to: "merchants#show"
+      post "/merchants", to: "merchants#create"
+      patch "/merchants/:id", to: "merchants#update"
+      delete "/merchants/:id", to: "merchants#destroy"
+    
+      get "/merchants", to: "merchants#index"
+      get "/merchants/:id", to: "merchants#show"
+      post "/merchants", to: "merchants#create"
+      patch "/merchants/:id", to: "merchants#update"
+      delete "/merchants/:id", to: "merchants#destroy"
+      
+      get "/items/:id/merchant", to: "items_merchant#index"
+      get "/merchants/:merchant_id/customers", to: "merchants_customers#index"
+      get "/merchants/:merchant_id/invoices", to: "merchants_invoices#index"
+      
+      get '/items', to: "items#index"
+      get '/items/:id', to: "items#show"
+      get '/merchants/:id/items', to: "merchant_items#index"
+      post "/items", to: "items#create"
+      patch "/items/:id", to: "items#update"
+      delete "/items/:id", to: "items#destroy"
+    end 
+  end
 end
 
 
