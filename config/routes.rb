@@ -11,27 +11,16 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "/merchants/find", to: "merchants#find"
       get "/items/find_all", to: "items#find_all"
-      get "/merchants/:id", to: "merchants#show"
-      post "/merchants", to: "merchants#create"
-      patch "/merchants/:id", to: "merchants#update"
-      delete "/merchants/:id", to: "merchants#destroy"
-    
-      get "/merchants", to: "merchants#index"
-      get "/merchants/:id", to: "merchants#show"
-      post "/merchants", to: "merchants#create"
-      patch "/merchants/:id", to: "merchants#update"
-      delete "/merchants/:id", to: "merchants#destroy"
+
+      resources :merchants
+      resources :items
       
+      get '/merchants/:id/items', to: "merchant_items#index"
       get "/items/:id/merchant", to: "items_merchant#index"
+
       get "/merchants/:merchant_id/customers", to: "merchants_customers#index"
       get "/merchants/:merchant_id/invoices", to: "merchants_invoices#index"
       
-      get '/items', to: "items#index"
-      get '/items/:id', to: "items#show"
-      get '/merchants/:id/items', to: "merchant_items#index"
-      post "/items", to: "items#create"
-      patch "/items/:id", to: "items#update"
-      delete "/items/:id", to: "items#destroy"
     end 
   end
 end
