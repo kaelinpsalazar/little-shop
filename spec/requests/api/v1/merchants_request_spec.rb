@@ -229,4 +229,22 @@ RSpec.describe "Mechant", type: :request do
     expect(merchant[:attributes][:name]).to eq("Bloodbath and Beyond")
     end
   end
+
+  describe 'find all merchants with filter' do
+    it 'returns all merchants that match the name search' do
+        create(:merchant, name: "Gnome Depot")
+        create(:merchant, name: "Gnome Palace")
+        create(:merchant, name: "Other Shop")
+
+    
+        get '/api/v1/merchants/find_all', params: { name: 'Gnome' }
+    
+        expect(response).to be_successful
+        merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(merchants.count).to eq(3)
+        expect(merchants[0][:attributes][:name]).to include("Gnome")
+      end
+  end
+
+  
 end

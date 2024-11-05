@@ -39,6 +39,11 @@ class Api::V1::MerchantsController < ApplicationController
         end
     end
 
+    def find_all
+        merchants = Merchant.find_by_params(params)
+        render json: MerchantSerializer.new(merchants)
+    end
+
     private
 
     def merchant_params

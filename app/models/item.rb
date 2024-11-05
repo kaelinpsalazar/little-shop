@@ -17,4 +17,17 @@ class Item < ApplicationRecord
   def self.find_items_by_name(name)
     where("name ILIKE ?", "%#{name}%")
   end
+
+  def self.find_by_params(params)
+    items = if params[:name].present?
+      where("name ILIKE ?", "%#{params[:name]}%").order(:name).limit(1)
+    elsif params[:min_price].present? && params[:max_price].present?
+      where("unit_price >= ? AND unit_price <= ?", params[:min_price].to_f, params[:max_price].to_f).order(:name).limit(1)
+    elsif params[:min_price].present?
+      where("unit_price >= ?", params[:min_price].to_f).order(:name).limit(1)
+    elsif params[:max_price].present?
+      where("unit_price <= ?", params[:max_price].to_f).order(:name).limit(1)
+    end
+  items.first
+  end
 end

@@ -4,7 +4,7 @@ RSpec.describe "Items API", type: :request do
   
   before(:each) do
     @merchant = Merchant.create!(name: "Steve")
-    create_list(:item, 4, merchant: @merchant)
+    @items = create_list(:item, 4, merchant: @merchant)
   
     @fake_merchant = Merchant.create!(name: "Fake Merchant")
   end
@@ -285,4 +285,51 @@ RSpec.describe "Items API", type: :request do
       )
     end
   end
+
+  describe 'find one item based on filtering' do
+    it "returns one item based on a minimum price" do
+
+      found_item = @items[0]
+
+      get '/api/v1/items/find' , params: {min_price: found_item.unit_price}
+
+      expect(response).to be_successful
+      item = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      
+    expect(item[:attributes][:name]).to eq(found_item.name) 
+    expect(item[:attributes][:unit_price]).to eq(found_item.unit_price)
+
+
+    end
+
+    it "returns one item based on max price" do
+      found_item = @items[0]
+
+      get'/api/v1/items/find', params: {max_price: found_item.unit_price}
+
+      expect(response).to be_successful
+      item= JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(item[:attributes][:name]).to eq(found_item.name)
+      expect(item[:attributes][:unit_price]).to eq(found_item.unit_price)
+    end
+
+    it "returns one item based on name" do
+      item1 = create(:item, merchant_id: @merchant.id, name: "Star Wars")
+      item2 = create(:item, merchant_id: @merchant.id, name: "Candy")
+      item3 = create(:item, merchant_id: @merchant.id, name: "Starry")
+      get'/api/v1/items/find', params: {name: found_item.name}
+
+      expect(response).to be_successful
+      item= JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(item[:attributes][:name]).to eq(found_item.name)
+
+
+
+
+    end
+  end
+
 end

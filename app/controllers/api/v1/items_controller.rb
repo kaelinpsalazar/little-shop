@@ -34,6 +34,14 @@ class Api::V1::ItemsController < ApplicationController
     item.destroy
   end
 
+  def find
+    item = Item.find_by_params(params)
+   
+    render json: ItemSerializer.new(item)
+    
+  end
+  
+
   def find_all
     if params[:min_price].present? || params[:max_price].present?
       items = Item.find_items_by_price(params.slice(:min_price, :max_price))    
