@@ -52,7 +52,7 @@ class Api::V1::ItemsController < ApplicationController
     if items.empty?
       render json: { error: "No items found" }, status: :not_found
     else
-      render json: ItemSerializer.new(items)
+      render json: ItemSerializer.new(items), status: :ok
     end
   end
   
