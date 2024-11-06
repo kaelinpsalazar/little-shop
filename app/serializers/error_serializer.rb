@@ -1,6 +1,7 @@
 class ErrorSerializer
   def self.format_error(exception, status)
-    {
+    error_object = {
+      message: exception.message,
       errors: [
         {
           status: status.to_s,
@@ -9,6 +10,10 @@ class ErrorSerializer
         }
       ]
     }
+
+    error_object[:errors].unshift(error_object[:errors].first.to_json)
+
+    error_object
   end
 
   private
