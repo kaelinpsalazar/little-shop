@@ -36,5 +36,20 @@ RSpec.describe Api::V1::MerchantsInvoicesController, type: :request do
 
       expect(json_response[:error]).to eq('Invalid status')
     end
+
+    it 'returns 404 if merchant does not exist' do
+      get '/api/v1/merchants/9900990/invoices'
+
+      expect(response).to have_http_status(:not_found)
+      error_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_response).to have_key(:errors)
+      expect(error_response[:errors]).to be_an(Array)
+
+      error= error_response[:errors].first
+      expect(error[:status]).to eq("404")
+      expect(error[:title]).to eq("Resource Not Found")
+      expect(error[:detail]).to eq("Couldn't find Merchant with 'id'=9900990")
+    end
   end
 end
