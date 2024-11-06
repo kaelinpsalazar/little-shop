@@ -35,6 +35,16 @@ class Item < ApplicationRecord
       return result
     end
 
+    if params[:name].present? && params[:name].empty?
+      result[:errors] = [{ detail: 'Name fragment cannot be empty.' }]
+      return result
+    end
+  
+    if params[:min_price].blank? && params[:max_price].blank? && params[:name].blank?
+      result[:errors] = [{ detail: 'No search parameters provided.' }]
+      return result
+    end
+
     items = all
     items = items.where('unit_price >= ?', params[:min_price]) if params[:min_price].present?
     items = items.where('unit_price <= ?', params[:max_price]) if params[:max_price].present?

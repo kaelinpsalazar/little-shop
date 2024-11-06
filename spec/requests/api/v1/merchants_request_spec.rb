@@ -240,7 +240,7 @@ RSpec.describe "Mechant", type: :request do
   describe 'find one merchant based on filtering' do
     it 'returns one merchant that matchs a name using #find_merchant_by_name(params)' do
     merchant2 = Merchant.create!(name: "Bloodbath and Beyond")
-    merchant1 = Merchant.create!(name: "Gblood Depot")
+    merchant1 = Merchant.create!(name: "Depot")
 
     get '/api/v1/merchants/find/?name=bloo'
 
@@ -248,7 +248,6 @@ RSpec.describe "Mechant", type: :request do
 
     
     merchant = JSON.parse(response.body, symbolize_names: true)[:data]
-    # binding.pry
     expect(merchant[:attributes][:name]).to eq("Bloodbath and Beyond")
     end
 
