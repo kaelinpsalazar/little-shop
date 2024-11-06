@@ -5,7 +5,7 @@ class MerchantSerializer
 
   def self.format_item_count(merchants)
   {
-   data: merchants.map do |merchant|
+    data: merchants.map do |merchant|
       {
         id: merchant.id.to_s,
         type: "merchant",
@@ -17,5 +17,4 @@ class MerchantSerializer
     end
   }
   end
-end
-  
+end  

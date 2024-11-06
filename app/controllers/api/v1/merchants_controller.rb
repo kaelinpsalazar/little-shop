@@ -8,7 +8,7 @@ class Api::V1::MerchantsController < ApplicationController
         if params[:count] == 'true'
         render json: MerchantSerializer.format_item_count(merchants)
         else
-          render json: MerchantSerializer.new(merchants)
+        render json: MerchantSerializer.new(merchants)
         end
     end
 
@@ -46,15 +46,6 @@ class Api::V1::MerchantsController < ApplicationController
             render json: { error: "Invalid search term" }, status: :bad_request
         end
     end
-
-    # def find_all
-    #     if params[:name].present?
-    #     merchants = Merchant.find_by_params(params)
-    #     render json: MerchantSerializer.new(merchants)
-    #     else
-    #     render json: { error: "Invalid search term" }, status: :bad_request
-    #   end
-    # end
 
     private
 
