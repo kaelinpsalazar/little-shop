@@ -53,7 +53,6 @@ class Api::V1::ItemsController < ApplicationController
       item = result[:items].first
       render json: ItemSerializer.new(item), status: :ok
     end
-  
   end
 
   
