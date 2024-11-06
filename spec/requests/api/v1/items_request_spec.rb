@@ -272,6 +272,20 @@ RSpec.describe "Items API", type: :request do
       )  
     end
 
+    it 'returns all items that match a maximum and minimum price parameter using #find_items_by_unit_price' do
+    get '/api/v1/items/find_all', params: { min_price: 30.00, max_price: 70.00 }
+
+    expect(response).to be_successful
+  
+    items = JSON.parse(response.body, symbolize_names: true)[:data]
+  
+    expect(items).to include(
+      include(
+        attributes: include(name: "airpump", unit_price: 55.00)
+      )
+    )  
+  end
+
     it 'returns all items that match a name using #find_items_by_name' do
       get '/api/v1/items/find_all', params: { name: 'air' }
 
@@ -287,6 +301,16 @@ RSpec.describe "Items API", type: :request do
         )
       )
     end
+
+    describe "reutrns a single item with name params using #find" do
+      it "returns a single item matching the search criteria" do
+        get "/api/v1/items/find", params: { name: "airpump" }
+        expect(response).to be_successful
+        item = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(item[:attributes][:name]).to eq("airpump")
+      end
+    end
+  
 
     describe "sad paths find all items" do
       before(:each) do
