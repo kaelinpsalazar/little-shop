@@ -1,4 +1,4 @@
-git class Api::V1::MerchantsController < ApplicationController    
+class Api::V1::MerchantsController < ApplicationController    
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
