@@ -241,6 +241,22 @@ RSpec.describe "Items API", type: :request do
       expect(created_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=4")
     end
 
+    it "returns a 404 error if the item does not exist" do
+      get "/api/v1/items/999999/merchant"
+    
+      expect(response).to have_http_status(:not_found)
+    
+      error_response = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(error_response).to have_key(:errors)
+      expect(error_response[:errors]).to be_an(Array)
+    
+      error = error_response[:errors].first
+      expect(error[:status]).to eq("404")
+      expect(error[:title]).to eq("Resource Not Found")
+      expect(error[:detail]).to eq("Couldn't find Item with 'id'=999999")
+    end
+
     it 'returns "Error" for any other status' do
       expect(ErrorSerializer.error_title(408)).to eq("Error")
       expect(ErrorSerializer.error_title(403)).to eq("Error")
