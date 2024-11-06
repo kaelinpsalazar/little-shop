@@ -35,6 +35,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find_all
+    if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
+      render json: { error: "Cannot search by both name and price" }, status: :bad_request
+      return
+    end
+
     if params[:min_price].present? || params[:max_price].present?
       items = Item.find_items_by_price(params.slice(:min_price, :max_price))    
     elsif params[:name].present?
