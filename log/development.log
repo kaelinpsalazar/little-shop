@@ -8041,3 +8041,19 @@ FOREIGN KEY ("invoice_id")
   [1m[36mMerchant Load (5.5ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" GROUP BY "merchants"."id" /* loading for pp */ ORDER BY "merchants"."created_at" DESC LIMIT $1[0m  [["LIMIT", 11]]
   [1m[36mMerchant Load (3.6ms)[0m  [1m[34mSELECT DISTINCT merchants.*, COUNT(items.id) AS item_count FROM "merchants" INNER JOIN "invoices" ON "invoices"."merchant_id" = "merchants"."id" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" WHERE "invoices"."status" = $1 GROUP BY "merchants"."id" /* loading for pp */ ORDER BY "merchants"."id" ASC LIMIT $2[0m  [["status", "returned"], ["LIMIT", 11]]
   [1m[36mMerchant Load (2.6ms)[0m  [1m[34mSELECT merchants.*, COUNT(items.id) AS item_count FROM "merchants" LEFT OUTER JOIN "items" ON "items"."merchant_id" = "merchants"."id" GROUP BY "merchants"."id" /* loading for pp */ ORDER BY "merchants"."id" ASC LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::SchemaMigration Load (6.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (93.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_development"[0m
+  [1m[35m (30.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "little_shop_test"[0m
+  [1m[35m (119.4ms)[0m  [1m[35mCREATE DATABASE "little_shop_development" ENCODING = 'unicode'[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCREATE DATABASE "little_shop_test" ENCODING = 'unicode'[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7448043059890211625)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-11-06 19:25:19.458181', '2024-11-06 19:25:19.458187') RETURNING "key"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7448043059890211625)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
