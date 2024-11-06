@@ -424,6 +424,29 @@ RSpec.describe "Items API", type: :request do
       error = JSON.parse(response.body, symbolize_names: true)
       expect(error[:errors].first[:detail]).to eq('Cannot filter by both price and name at the same time.')      
     end
+
+    it "returns a 400 error when name is empty" do
+      get '/api/v1/items/find_all?name'
+
+      expect(response.status).to eq(400)
+
+
+
+   end
+   it "returns a 400 error when min_price is empty" do
+     get '/api/v1/items/find_all?min_price='
+
+     expect(response.status).to eq(400)
+     error_response = JSON.parse(response.body, symbolize_names: true)
+   end
+
+   it "returns a 400 error when max_price is empty" do
+     get '/api/v1/items/find_all?max_price='
+
+     expect(response.status).to eq(400)
+     error_response = JSON.parse(response.body, symbolize_names: true)
+   end
+    
   end
 end
 end
