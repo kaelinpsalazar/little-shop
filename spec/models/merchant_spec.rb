@@ -2,26 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
   before(:each) do
-    # Create 3 merchants
     @merchant1 = create(:merchant, name: "Gnome Depot", created_at: 2.days.ago)
     @merchant2 = create(:merchant, name: "Bloodbath and Beyond", created_at: 1.day.ago)
     @merchant3 = create(:merchant, name: "The Philosopher's Scone", created_at: Time.now)
-
-    # Create 5 items for the first merchant
     @items = create_list(:item, 5, merchant: @merchant1)
+    @customer = create(:customer)
 
-    # Create invoices manually for the first merchant
     @returned_invoice = Invoice.create(
       merchant_id: @merchant1.id,
-      # customer_id: customer.id,
+      customer_id: @customer.id,  
       status: 'returned',
       created_at: Time.now,
       updated_at: Time.now
     )
-
     @pending_invoice = Invoice.create(
       merchant_id: @merchant1.id,
-      # customer_id: customer.id,
+      customer_id: @customer.id,  
       status: 'pending',
       created_at: Time.now,
       updated_at: Time.now
@@ -44,11 +40,33 @@ RSpec.describe Merchant, type: :model do
     end
   end
 
+  describe '.with_returned_status' do
+    it 'returns merchants with returned invoices' do
+      expect(Merchant.with_returned_status).to include(@merchant1)
+      expect(Merchant.with_returned_status).not_to include(@merchant2, @merchant3)
+    end
+  end
+
   describe '.with_item_count' do 
     it 'returns merchants with item_count' do
       merchant = Merchant.find(@merchant1.id)
       item_count = merchant.item_count
       expect(merchant.item_count).to eq(5)
+    end
+  end
+
+  describe '.fetch_merchants' do
+    it 'returns sorted merchants when sorted param is age' do
+      expect(Merchant.fetch_merchants(sorted: 'age')).to eq([@merchant3, @merchant2, @merchant1])
+    end
+  
+    it 'returns merchants with returned status when status param is returned' do
+      expect(Merchant.fetch_merchants(status: 'returned')).to include(@merchant1)
+      expect(Merchant.fetch_merchants(status: 'returned')).not_to include(@merchant2, @merchant3)
+    end
+  
+    it 'returns all merchants when no specific params are provided' do
+      expect(Merchant.fetch_merchants({})).to include(@merchant1, @merchant2, @merchant3)
     end
   end
 

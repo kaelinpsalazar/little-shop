@@ -50,12 +50,11 @@ class Api::V1::ItemsController < ApplicationController
     if result[:errors]
       render json: result, status: :bad_request
     else
-      render json: ItemSerializer.new(result[:items]), status: :ok
+      item = result[:items].first
+      render json: ItemSerializer.new(item), status: :ok
     end
   end
 
-  
-  
 
   private
   def item_params
