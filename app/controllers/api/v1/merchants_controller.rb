@@ -41,7 +41,9 @@ class Api::V1::MerchantsController < ApplicationController
         if params[:name].present?
             merchant = Merchant.find_merchant_by_name(params)
             if merchant
-                render json: MerchantSerializer.new(merchant)
+                without_item_count = MerchantSerializer.new(merchant).serializable_hash                
+                without_item_count[:data][:attributes].delete(:item_count)
+                render json: without_item_count
             else
                 render json: { data: {} }, status: :not_found
             end

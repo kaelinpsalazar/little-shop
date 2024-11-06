@@ -15,7 +15,7 @@ RSpec.describe "Mechant", type: :request do
         expect(response).to be_successful
 
         merchant = JSON.parse(response.body, symbolize_names: true)[:data]
-
+        
         expect(merchant.count).to eq(3)
 
         merchant.each do |merchant|
@@ -108,8 +108,9 @@ RSpec.describe "Mechant", type: :request do
             get "/api/v1/merchants/#{@merchant1.id}/items"
             expect(response).to be_successful
 
-            item_info = JSON.parse(response.body, symbolize_names: true)
-  
+            item_info = JSON.parse(response.body, symbolize_names: true)       
+
+
         item_info[:data].each do |item|
           expect(item[:type]).to eq('item')
           expect(item[:attributes]).to have_key(:name)
@@ -144,9 +145,7 @@ RSpec.describe "Mechant", type: :request do
         end
     end
 
-    describe "sad paths" do
-
-   
+    describe "sad paths" do   
         it "will return an error if all params are not valid" do
           merchant_params = {
             merchant: {
