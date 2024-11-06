@@ -198,23 +198,21 @@ RSpec.describe "Mechant", type: :request do
         end
 
         it "will return an error if given an empty object" do
-            merchant_params = {        
-            }
-      
-            headers = { "CONTENT_TYPE" => "application/json" }
-      
-            patch "/api/v1/merchants/4", headers: headers, params: JSON.generate(merchant: merchant_params)
-            expect(response).to_not be_successful
-            expect(response.status).to eq(404)
-      
-      
-            created_merchant = JSON.parse(response.body, symbolize_names: true)
-      
-            expect(created_merchant[:errors]).to be_a(Array)
-            expect(created_merchant[:errors].first[:status]).to eq("404")
-            expect(created_merchant[:errors].first[:title]).to eq("Resource Not Found")
-            expect(created_merchant[:errors].first[:detail]).to eq("Couldn't find Merchant with 'id'=4")
-          end
+          merchant = create(:merchant)
+          merchant_params = {
+          }
+          headers = { "CONTENT_TYPE" => "application/json" }
+          patch "/api/v1/merchants/#{merchant.id}", headers: headers, params: JSON.generate(merchant: merchant_params)
+          expect(response).to_not be_successful
+          expect(response).to have_http_status(:bad_request)
+          
+          created_merchant = JSON.parse(response.body, symbolize_names: true)
+
+          expect(created_merchant[:errors]).to be_a(Array)
+          expect(created_merchant[:errors].first[:status]).to eq("400")
+          expect(created_merchant[:errors].first[:title]).to eq("Bad Request")
+          expect(created_merchant[:errors].first[:detail]).to eq("param is missing or the value is empty: merchant")
+        end
 
           it "handles errors for customers for given merchant if given invalid merchant" do
             get "/api/v1/merchants/990099/customers"
