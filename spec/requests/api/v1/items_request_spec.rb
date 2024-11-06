@@ -203,7 +203,24 @@ RSpec.describe "Items API", type: :request do
       expect(get_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=219058")
     end
 
+    it "returns a 400 status with error message when required params are missing" do
+      item_params = {        
+      }
+
+      headers = { "CONTENT_TYPE" => "application/json" }      
     
+      post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+    
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+    
+      missing_params = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(missing_params[:errors]).to be_a(Array)
+      expect(missing_params[:errors].first[:status]).to eq("400")
+      expect(missing_params[:errors].first[:title]).to eq("Bad Request")
+      expect(missing_params[:errors].first[:detail]).to eq("param is missing or the value is empty: item")
+    end
 
     it "will return an error if given an empty object" do
       item_params = {        
