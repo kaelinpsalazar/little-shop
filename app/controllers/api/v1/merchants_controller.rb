@@ -23,7 +23,13 @@ class Api::V1::MerchantsController < ApplicationController
     end
 
     def update
-        render json: Merchant.update(params[:id], merchant_params)
+        merchant = Merchant.find(params[:id])
+
+        if merchant.update(merchant_params)
+          render json: MerchantSerializer.new(merchant), status: :ok
+        else
+          render json: { errors: merchant.errors.full_messages }, status: :unprocessable_entity
+        end
     end
     
     def destroy
