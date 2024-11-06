@@ -4,8 +4,17 @@ class Api::V1::MerchantsController < ApplicationController
     rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
   
     def index
+<<<<<<< HEAD
+        merchants = Merchant.fetch_merchants(params)
+        if params[:count] == 'true'
+        render json: MerchantSerializer.format_item_count(merchants)
+        else
+          render json: MerchantSerializer.new(merchants)
+        end
+=======
       merchants = Merchant.fetch_merchants(params)
       render json: MerchantSerializer.new(merchants)
+>>>>>>> 883c874b7c037ded399f813e0eab9f92986f605c
     end
 
     def show 
@@ -32,7 +41,9 @@ class Api::V1::MerchantsController < ApplicationController
         if params[:name].present?
             merchant = Merchant.find_merchant_by_name(params)
             if merchant
-                render json: MerchantSerializer.new(merchant)
+                without_item_count = MerchantSerializer.new(merchant).serializable_hash                
+                without_item_count[:data][:attributes].delete(:item_count)
+                render json: without_item_count
             else
                 render json: { data: {} }, status: :not_found
             end
