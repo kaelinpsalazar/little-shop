@@ -19,15 +19,12 @@ class Merchant < ApplicationRecord
   end
 
   def self.fetch_merchants(params)
-    merchants = if params[:sorted] == 'age'
-                  sorted_by_created_at
-                elsif params[:status] == 'returned'
-                  with_returned_status
-                else
-                  Merchant.all
-                end
-    merchants = merchants.with_item_count 
-    merchants 
+    merchants = Merchant.all
+    merchants = merchants.sorted_by_created_at if params[:sorted] == 'age'
+    merchants = merchants.with_returned_status if params[:status] == 'returned'
+    merchants = merchants.with_item_count
+    merchants = merchants.order(:id) unless params[:sorted]      
+    merchants
   end
 
   
@@ -45,7 +42,5 @@ class Merchant < ApplicationRecord
       merchants = where("name ILIKE ?", "%#{params[:name]}%").order(:name)
     end
     merchants
-  end
-
-  
+  end 
 end
