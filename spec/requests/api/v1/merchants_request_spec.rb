@@ -258,6 +258,16 @@ RSpec.describe "Mechant", type: :request do
         error_response = JSON.parse(response.body, symbolize_names: true)
         expect(error_response[:error]).to eq("Invalid search term")
       end
+
+      it 'returns a 404 code when no merchant is found' do
+        get '/api/v1/merchants/find/?name=NonExistentMerchant'
+        
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+    
+        error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response[:error]).to eq("Merchant not found")
+      end
   end
 
 
