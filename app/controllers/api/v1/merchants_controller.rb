@@ -1,4 +1,4 @@
-class Api::V1::MerchantsController < ApplicationController    
+git class Api::V1::MerchantsController < ApplicationController    
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
@@ -15,7 +15,7 @@ class Api::V1::MerchantsController < ApplicationController
 
     def create
         merchant = Merchant.create!(merchant_params)
-        render json: MerchantSerializer.new(merchant)
+        render json: MerchantSerializer.new(merchant), status: :created
     end
 
     def update
@@ -23,7 +23,9 @@ class Api::V1::MerchantsController < ApplicationController
     end
     
     def destroy
-        render json: Merchant.delete(params[:id])
+        merchant = Merchant.find(params[:id])
+        merchant.destroy
+        render json: { message: "Merchant deleted successfully" }, status: :no_content
     end
 
     def find
@@ -35,9 +37,18 @@ class Api::V1::MerchantsController < ApplicationController
                 render json: { data: {} }, status: :not_found
             end
         else
-            render json: { error: "Merchant not found" }, status: :not_found
+            render json: { error: "Invalid search term" }, status: :bad_request
         end
     end
+
+    # def find_all
+    #     if params[:name].present?
+    #     merchants = Merchant.find_by_params(params)
+    #     render json: MerchantSerializer.new(merchants)
+    #     else
+    #     render json: { error: "Invalid search term" }, status: :bad_request
+    #   end
+    # end
 
     private
 
