@@ -4,17 +4,12 @@ class Api::V1::MerchantsController < ApplicationController
     rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
   
     def index
-<<<<<<< HEAD
         merchants = Merchant.fetch_merchants(params)
         if params[:count] == 'true'
         render json: MerchantSerializer.format_item_count(merchants)
         else
-          render json: MerchantSerializer.new(merchants)
+        render json: MerchantSerializer.new(merchants)
         end
-=======
-      merchants = Merchant.fetch_merchants(params)
-      render json: MerchantSerializer.new(merchants)
->>>>>>> 883c874b7c037ded399f813e0eab9f92986f605c
     end
 
     def show 
@@ -51,15 +46,6 @@ class Api::V1::MerchantsController < ApplicationController
             render json: { error: "Invalid search term" }, status: :bad_request
         end
     end
-
-    # def find_all
-    #     if params[:name].present?
-    #     merchants = Merchant.find_by_params(params)
-    #     render json: MerchantSerializer.new(merchants)
-    #     else
-    #     render json: { error: "Invalid search term" }, status: :bad_request
-    #   end
-    # end
 
     private
 
