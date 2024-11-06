@@ -295,6 +295,35 @@ RSpec.describe "Items API", type: :request do
         @item2 = create(:item, name: 'hydroflask', unit_price: 20.00, merchant: @merchant)
         @item3 = create(:item, name: 'airpump', unit_price: 55.00, merchant: @merchant)
       end
+      it 'find all items on partial name' do
+    
+        get '/api/v1/items/find_all/?name=air'
+    
+        expect(response).to be_successful
+    
+        
+        items = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(items).to be_an(Array)
+        items.each do |item|
+          expect(item[:attributes][:name]).to include("air")
+        
+        end
+      end
+
+      it "returns a 400 error when fragment is empty" do
+        get '/api/v1/items/find_all/?name=air'
+    
+        expect(response).to be_successful
+    
+        
+        items = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(items).to be_an(Array)
+        items.each do |item|
+          expect(item[:attributes][:name]).to include("air")
+        
+        end
+
+      end
     
       it 'returns an empty array when no items match the search criteria' do
         get '/api/v1/items/find_all', params: { min_price: 999999 }
