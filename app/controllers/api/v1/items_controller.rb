@@ -35,26 +35,25 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find_all
-    if params[:name].present? && (params[:min_price].present? || params[:max_price].present?)
-      render json: { error: "Cannot search by both name and price" }, status: :bad_request
-      return
-    end
+    result = Item.search_params(params)
 
-    if params[:min_price].present? || params[:max_price].present?
-      items = Item.find_items_by_price(params.slice(:min_price, :max_price))    
-    elsif params[:name].present?
-      items = Item.find_items_by_name(params[:name])
+    if result[:errors]
+      render json: result, status: :bad_request
     else
-      render json: { error: "No search parameters provided" }, status: :bad_request
-      return
-    end
-  
-    if items.empty?
-      render json: { error: "No items found" }, status: :not_found
-    else
-      render json: ItemSerializer.new(items), status: :ok
+      render json: ItemSerializer.new(result[:items]), status: :ok
     end
   end
+
+  def find
+    result = Item.search_params(params)
+
+    if result[:errors]
+      render json: result, status: :bad_request
+    else
+      render json: ItemSerializer.new(result[:items]), status: :ok
+    end
+  end
+
   
   
 

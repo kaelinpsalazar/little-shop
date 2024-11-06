@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Mechant", type: :request do
     before(:each) do 
+        Merchant.delete_all
         @merchant1 = Merchant.create!(name: "Gnome Depot")
         @merchant2 = Merchant.create!(name: "Bloodbath and Beyond")
         @merchant3 = Merchant.create!(name: "The Philosopher's Scone")
@@ -47,12 +48,13 @@ RSpec.describe "Mechant", type: :request do
     describe "make a new merchant with #create" do
         it "creates a new merchant" do
             merchant_attributes = {name: "Boo Value"}
-
-            post "/api/v1/merchants#create", params: {merchant: merchant_attributes}
-
-            merchant = JSON.parse(response.body, symbolize_names: true)[:data]
             
+            post "/api/v1/merchants", params: {merchant: merchant_attributes}
+            
+            expect(response.status).to eq(201)
+            merchant = JSON.parse(response.body, symbolize_names: true)[:data]
             expect(merchant[:attributes][:name]).to eq("Boo Value")
+
         end
     end
 
@@ -143,10 +145,12 @@ RSpec.describe "Mechant", type: :request do
     end
 
     describe "sad paths" do
+
+   
         it "will return an error if all params are not valid" do
           merchant_params = {
             merchant: {
-              name: nil
+              name: ""
             }
           }
     
@@ -164,6 +168,21 @@ RSpec.describe "Mechant", type: :request do
           expect(created_merchant[:errors].first[:title]).to eq("Unprocessable Entity")
           expect(created_merchant[:errors].first[:detail]).to eq("Validation failed: Name can't be blank")
         end
+
+        it "returns a 404 status with error message when item doesn't exist" do
+            get "/api/v1/merchants/219058/items"
+      
+            expect(response).to_not be_successful
+            expect(response.status).to eq(404)
+      
+            get_merchant = JSON.parse(response.body, symbolize_names: true)
+      
+            expect(get_merchant[:errors]).to be_a(Array)
+            expect(get_merchant[:errors].first[:status]).to eq("404")
+            expect(get_merchant[:errors].first[:title]).to eq("Resource Not Found")
+            expect(get_merchant[:errors].first[:detail]).to eq("Couldn't find Merchant with 'id'=219058")
+          end
+
     
         it "returns a 404 status with error message when item doesn't exist" do
           get "/api/v1/merchants/219058"
@@ -221,12 +240,45 @@ RSpec.describe "Mechant", type: :request do
 
   describe 'find one merchant based on filtering' do
     it 'returns one merchant that matchs a name using #find_merchant_by_name(params)' do
-    get '/api/v1/merchants/find', params: { name: 'blood' }
+    merchant2 = Merchant.create!(name: "Bloodbath and Beyond")
+    merchant1 = Merchant.create!(name: "Depot")
+
+    get '/api/v1/merchants/find/?name=bloo'
 
     expect(response).to be_successful
 
+    
     merchant = JSON.parse(response.body, symbolize_names: true)[:data]
     expect(merchant[:attributes][:name]).to eq("Bloodbath and Beyond")
     end
+
+    it "returns a 400 code when there is no input" do
+        get '/api/v1/merchants/find'
+        
+        expect(response).to_not be_successful
+        expect(response.status).to eq(400)
+      
+        error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response[:error]).to eq("Invalid search term")
+      end
   end
+
+
+#   describe 'find all merchants with filter' do
+#     it 'returns all merchants that match the name search' do
+#         create(:merchant, name: "Gnome Depot")
+#         create(:merchant, name: "Gnome Palace")
+#         create(:merchant, name: "Other Shop")
+
+    
+#         get '/api/v1/merchants/find_all', params: { name: 'Gnome' }
+    
+#         expect(response).to be_successful
+#         merchants = JSON.parse(response.body, symbolize_names: true)[:data]
+#         expect(merchants.count).to eq(3)
+#         expect(merchants[0][:attributes][:name]).to include("Gnome")
+#       end
+#   end
+
+  
 end

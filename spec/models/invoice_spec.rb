@@ -19,6 +19,7 @@ RSpec.describe Invoice, type: :model do
     it { should belong_to(:customer) }
     it { should belong_to(:merchant) }
   end
+
   describe 'valid_status?' do
       it 'returns true for "shipped"' do
         expect(Invoice.valid_status?('shipped')).to be_truthy
@@ -31,9 +32,15 @@ RSpec.describe Invoice, type: :model do
       it 'returns true for "packaged"' do
         expect(Invoice.valid_status?('packaged')).to be_truthy
       end
-    
-    
 
+      it 'returns a status' do
+        expect(Invoice.by_status('shipped')).not_to be_empty
+        expect(Invoice.by_status('returned')).not_to be_empty
+      end
+    
+      it 'returns an empty array when invalid' do
+        expect(Invoice.by_status('invalid_status')).to eq([])
+      end
     
       it 'returns false for "invalid_status"' do
         expect(Invoice.valid_status?('invalid_status')).to be_falsey
