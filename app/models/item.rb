@@ -18,16 +18,30 @@ class Item < ApplicationRecord
     where("name ILIKE ?", "%#{name}%")
   end
 
-  def self.find_by_params(params)
-    items = if params[:name].present?
-      where("name ILIKE ?", "%#{params[:name]}%").order(:name).limit(1)
-    elsif params[:min_price].present? && params[:max_price].present?
-      where("unit_price >= ? AND unit_price <= ?", params[:min_price].to_f, params[:max_price].to_f).order(:name).limit(1)
-    elsif params[:min_price].present?
-      where("unit_price >= ?", params[:min_price].to_f).order(:name).limit(1)
-    elsif params[:max_price].present?
-      where("unit_price <= ?", params[:max_price].to_f).order(:name).limit(1)
+  def self.search_params(params)
+    result = {}
+
+    if params[:min_price].present? && params[:min_price].to_f < 0
+      result[:errors] = [{ detail: 'Price cannot be less than zero.' }]
+      return result
+    elsif params[:max_price].present? && params[:max_price].to_f < 0
+      result[:errors] = [{ detail: 'Price cannot be less than zero.' }]
+      return result
+    elsif params[:min_price].present? && params[:name].present?
+      result[:errors] = [{ detail: 'Cannot filter by both price and name at the same time.' }]
+      return result
+    elsif params[:max_price].present? && params[:name].present?
+      result[:errors] = [{ detail: 'Cannot filter by both price and name at the same time.' }]
+      return result
     end
-  items.first
+
+    items = all
+    items = items.where('unit_price >= ?', params[:min_price]) if params[:min_price].present?
+    items = items.where('unit_price <= ?', params[:max_price]) if params[:max_price].present?
+    items = items.where('name ILIKE ?', "%#{params[:name]}%") if params[:name].present?
+
+    result[:items] = items
+    result
   end
+
 end

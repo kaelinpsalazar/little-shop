@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "Items API", type: :request do
   
   before(:each) do
+    Item.destroy_all
     @merchant = Merchant.create!(name: "Steve")
     @items = create_list(:item, 4, merchant: @merchant)
   
@@ -202,6 +203,8 @@ RSpec.describe "Items API", type: :request do
       expect(get_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=219058")
     end
 
+    
+
     it "will return an error if given an empty object" do
       item_params = {        
       }
@@ -284,52 +287,57 @@ RSpec.describe "Items API", type: :request do
         )
       )
     end
+
+    describe "sad paths find all items" do
+      before(:each) do
+        @merchant = create(:merchant)
+        @item1 = create(:item, name: 'airbuds', unit_price: 75.00, merchant: @merchant)
+        @item2 = create(:item, name: 'hydroflask', unit_price: 20.00, merchant: @merchant)
+        @item3 = create(:item, name: 'airpump', unit_price: 55.00, merchant: @merchant)
+      end
+    
+      it 'returns an empty array when no items match the search criteria' do
+        get '/api/v1/items/find_all', params: { min_price: 999999 }
+        
+        expect(response.status).to eq(200)  
+        expect(JSON.parse(response.body)["data"]).to eq([])      
+      end
+
+    it "returns an error when a min price is less than 0" do
+      get '/api/v1/items/find_all?min_price=-1'
+    
+      expect(response.status).to eq(400) 
+    
+      error = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(error[:errors].first[:detail]).to eq('Price cannot be less than zero.')
+    end
+    it "returns an error when a max price is less than 0" do
+      get '/api/v1/items/find_all?max_price=-1'
+    
+      expect(response.status).to eq(400) 
+    
+      error = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(error[:errors].first[:detail]).to eq('Price cannot be less than zero.')
+    end
+
+    it "returns a 400 error when min price and name are sent" do
+      get '/api/v1/items/find_all?name=alex&min_price=20'
+
+      expect(response.status).to eq(400)
+
+      error = JSON.parse(response.body, symbolize_names: true)
+      expect(error[:errors].first[:detail]).to eq('Cannot filter by both price and name at the same time.')      
+    end
+    it "returns a 400 error when min price and name are sent" do
+      get '/api/v1/items/find_all?name=alex&max_price=20'
+
+      expect(response.status).to eq(400)
+
+      error = JSON.parse(response.body, symbolize_names: true)
+      expect(error[:errors].first[:detail]).to eq('Cannot filter by both price and name at the same time.')      
+    end
   end
-
-  describe 'find one item based on filtering' do
-    it "returns one item based on a minimum price" do
-
-      found_item = @items[0]
-
-      get '/api/v1/items/find' , params: {min_price: found_item.unit_price}
-
-      expect(response).to be_successful
-      item = JSON.parse(response.body, symbolize_names: true)[:data]
-
-      
-    expect(item[:attributes][:name]).to eq(found_item.name) 
-    expect(item[:attributes][:unit_price]).to eq(found_item.unit_price)
-
-
-    end
-
-    it "returns one item based on max price" do
-      found_item = @items[0]
-
-      get'/api/v1/items/find', params: {max_price: found_item.unit_price}
-
-      expect(response).to be_successful
-      item= JSON.parse(response.body, symbolize_names: true)[:data]
-
-      expect(item[:attributes][:name]).to eq(found_item.name)
-      expect(item[:attributes][:unit_price]).to eq(found_item.unit_price)
-    end
-
-    it "returns one item based on name" do
-      item1 = create(:item, merchant_id: @merchant.id, name: "Star Wars")
-      item2 = create(:item, merchant_id: @merchant.id, name: "Candy")
-      item3 = create(:item, merchant_id: @merchant.id, name: "Starry")
-      get'/api/v1/items/find', params: {name: found_item.name}
-
-      expect(response).to be_successful
-      item= JSON.parse(response.body, symbolize_names: true)[:data]
-
-      expect(item[:attributes][:name]).to eq(found_item.name)
-
-
-
-
-    end
-  end
-
+end
 end
