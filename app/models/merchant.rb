@@ -39,13 +39,4 @@ class Merchant < ApplicationRecord
     merchant = Merchant.where("name ILIKE ?", "%#{params[:name]}%").first
     merchant
   end
-
-  def self.find_by_params(params)
-    if params[:name].present?
-      merchants = where("name ILIKE ?", "%#{params[:name]}%").order(:name)
-    end
-    merchants
-  end
-
-  
 end
