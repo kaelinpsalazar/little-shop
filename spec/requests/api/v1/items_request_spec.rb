@@ -3,8 +3,9 @@ require "rails_helper"
 RSpec.describe "Items API", type: :request do
   
   before(:each) do
+    Item.destroy_all
     @merchant = Merchant.create!(name: "Steve")
-    create_list(:item, 4, merchant: @merchant)
+    @items = create_list(:item, 4, merchant: @merchant)
   
     @fake_merchant = Merchant.create!(name: "Fake Merchant")
   end
@@ -202,6 +203,8 @@ RSpec.describe "Items API", type: :request do
       expect(get_item[:errors].first[:detail]).to eq("Couldn't find Item with 'id'=219058")
     end
 
+    
+
     it "will return an error if given an empty object" do
       item_params = {        
       }
@@ -284,5 +287,86 @@ RSpec.describe "Items API", type: :request do
         )
       )
     end
+
+    describe "sad paths find all items" do
+      before(:each) do
+        @merchant = create(:merchant)
+        @item1 = create(:item, name: 'airbuds', unit_price: 75.00, merchant: @merchant)
+        @item2 = create(:item, name: 'hydroflask', unit_price: 20.00, merchant: @merchant)
+        @item3 = create(:item, name: 'airpump', unit_price: 55.00, merchant: @merchant)
+      end
+      it 'find all items on partial name' do
+    
+        get '/api/v1/items/find_all/?name=air'
+    
+        expect(response).to be_successful
+    
+        
+        items = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(items).to be_an(Array)
+        items.each do |item|
+          expect(item[:attributes][:name]).to include("air")
+        
+        end
+      end
+
+      it "returns a 400 error when fragment is empty" do
+        get '/api/v1/items/find_all/?name=air'
+    
+        expect(response).to be_successful
+    
+        
+        items = JSON.parse(response.body, symbolize_names: true)[:data]
+        expect(items).to be_an(Array)
+        items.each do |item|
+          expect(item[:attributes][:name]).to include("air")
+        
+        end
+
+      end
+    
+      it 'returns an empty array when no items match the search criteria' do
+        get '/api/v1/items/find_all', params: { min_price: 999999 }
+        
+        expect(response.status).to eq(200)  
+        expect(JSON.parse(response.body)["data"]).to eq([])      
+      end
+
+    it "returns an error when a min price is less than 0" do
+      get '/api/v1/items/find_all?min_price=-1'
+    
+      expect(response.status).to eq(400) 
+    
+      error = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(error[:errors].first[:detail]).to eq('Price cannot be less than zero.')
+    end
+    it "returns an error when a max price is less than 0" do
+      get '/api/v1/items/find_all?max_price=-1'
+    
+      expect(response.status).to eq(400) 
+    
+      error = JSON.parse(response.body, symbolize_names: true)
+    
+      expect(error[:errors].first[:detail]).to eq('Price cannot be less than zero.')
+    end
+
+    it "returns a 400 error when min price and name are sent" do
+      get '/api/v1/items/find_all?name=alex&min_price=20'
+
+      expect(response.status).to eq(400)
+
+      error = JSON.parse(response.body, symbolize_names: true)
+      expect(error[:errors].first[:detail]).to eq('Cannot filter by both price and name at the same time.')      
+    end
+    it "returns a 400 error when min price and name are sent" do
+      get '/api/v1/items/find_all?name=alex&max_price=20'
+
+      expect(response.status).to eq(400)
+
+      error = JSON.parse(response.body, symbolize_names: true)
+      expect(error[:errors].first[:detail]).to eq('Cannot filter by both price and name at the same time.')      
+    end
   end
+end
 end
