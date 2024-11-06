@@ -3,15 +3,14 @@ class Api::V1::MerchantsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActionController::ParameterMissing, with: :parameter_missing_response
   
-    def update
-      merchant = Merchant.find(params[:id])
-
-      if merchant.update(merchant_params)
-        render json: MerchantSerializer.new(merchant), status: :ok
-      else
-        render json: { errors: merchant.errors.full_messages }, status: :unprocessable_entity
-      end
-  end
+    def index
+        merchants = Merchant.fetch_merchants(params)
+        if params[:count] == 'true'
+        render json: MerchantSerializer.format_item_count(merchants)
+        else
+        render json: MerchantSerializer.new(merchants)
+        end
+    end
 
     def show 
         merchant = Merchant.with_item_count.find(params[:id])
@@ -24,7 +23,13 @@ class Api::V1::MerchantsController < ApplicationController
     end
 
     def update
-        render json: Merchant.update(params[:id], merchant_params)
+        merchant = Merchant.find(params[:id])
+
+        if merchant.update(merchant_params)
+          render json: MerchantSerializer.new(merchant), status: :ok
+        else
+          render json: { errors: merchant.errors.full_messages }, status: :unprocessable_entity
+        end
     end
     
     def destroy
